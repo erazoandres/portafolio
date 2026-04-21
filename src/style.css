@@ -106,7 +106,8 @@ img {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(245, 158, 11, 0.06), transparent 40%);
+  background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(245, 158, 11, 0.15), transparent 80%),
+              radial-gradient(300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(245, 158, 11, 0.1), transparent 50%);
   transition: opacity 0.3s ease;
 }
 
@@ -114,11 +115,11 @@ img {
 .void-bg .grid-lines {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 50px 50px;
-  -webkit-mask-image: radial-gradient(400px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), black, transparent 100%);
-  mask-image: radial-gradient(400px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), black, transparent 100%);
-  opacity: 0.6;
+  -webkit-mask-image: radial-gradient(600px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), black 10%, transparent 100%);
+  mask-image: radial-gradient(600px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), black 10%, transparent 100%);
+  opacity: 0.8;
 }
 
 /* ─── SCROLL PROGRESS ─── */
@@ -156,20 +157,32 @@ img {
 }
 
 .section-label {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 0.75rem;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .section-label::before {
-  content: '//';
-  opacity: 0.5;
+  content: '';
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent);
+  animation: blink-caret 2s infinite;
 }
 
 .section-heading {
@@ -488,20 +501,26 @@ img {
 
 .hero-role {
   font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--text-secondary);
+  letter-spacing: 0.02em;
+}
+
+.role-keyword {
+  color: #c678dd; /* Classic IDE Reserved Keyword Purple */
+  font-weight: 600;
 }
 
 .hero-role .caret {
   color: var(--accent);
-  /* animation: film-grain 8s steps(10) infinite; */
+  animation: blink-caret 1s step-end infinite;
 }
 
 @keyframes blink-caret {
-  50% {
-    opacity: 0
-  }
+  50% { opacity: 0; }
 }
+
+
 
 .hero-desc {
   font-size: 1rem;

@@ -12,6 +12,8 @@ const NAME_TEXT = 'Andrés Erazo';
  */
 export default function HeroSection({ onNavigate }) {
   const [visibleLines, setVisibleLines] = useState([]);
+  const [displayedRole, setDisplayedRole] = useState('');
+  const ROLE_TEXT = 'Senior Frontend Engineer';
   const containerRef = useRef(null);
 
 
@@ -22,7 +24,15 @@ export default function HeroSection({ onNavigate }) {
     
     tl.from('.hero-badge', { y: -20, opacity: 0, duration: 0.6 })
       .from('.hero-name', { y: 30, opacity: 0, duration: 0.8, ease: 'back.out(1.7)' }, '-=0.4')
-      .from('.hero-role', { x: -20, opacity: 0, duration: 0.5 }, '-=0.4')
+      .to({}, {
+        duration: 1.2,
+        onUpdate: function() {
+          const progress = this.progress();
+          const charCount = Math.floor(progress * ROLE_TEXT.length);
+          setDisplayedRole(ROLE_TEXT.slice(0, charCount));
+        },
+        ease: 'none'
+      }, '-=0.2')
       .from('.hero-desc', { opacity: 0, y: 10, duration: 1 }, '-=0.2')
       .from('.hero-actions .btn', { 
         y: 20, 
@@ -81,7 +91,7 @@ export default function HeroSection({ onNavigate }) {
           </h1>
 
           <p className="hero-role">
-            Senior Frontend Engineer <span className="caret">|</span>
+            <span className="role-keyword">{displayedRole}</span><span className="caret">|</span>
           </p>
 
           <p className="hero-desc">
