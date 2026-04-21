@@ -12,6 +12,7 @@ export const projectsData = [
     file: 'audit-studio/',
     image: '/assets/nexus.png',
     link: 'https://erazoandres.github.io/Audit-Studio/index.html',
+    github: 'https://github.com/erazoandres/Audit-Studio',
     desc: 'Centro de control para gestión de grupos y análisis de pagos.',
     tags: ['HTML5', 'CSS3', 'JavaScript'],
   },
@@ -20,6 +21,7 @@ export const projectsData = [
     file: 'kinetic-social/',
     image: '/assets/kinect.png',
     link: 'https://erazoandres.github.io/KINETIC-SOCIAL/',
+    github: 'https://github.com/erazoandres/KINETIC-SOCIAL',
     desc: 'Plataforma para proyectos sociales e impacto comunitario.',
     tags: ['HTML5', 'CSS3', 'JavaScript'],
   },
@@ -28,6 +30,7 @@ export const projectsData = [
     file: 'quantum-notes/',
     image: 'https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=600&auto=format&fit=crop',
     link: null,
+    github: null,
     desc: 'App de notas con encriptación avanzada y sincronización real.',
     tags: ['React', 'Firebase'],
   },
@@ -36,6 +39,7 @@ export const projectsData = [
     file: 'map-builder/',
     image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=600&auto=format&fit=crop',
     link: 'https://erazoandres.github.io/mapBuilder/',
+    github: 'https://github.com/erazoandres/mapBuilder',
     desc: 'Editor de niveles por capas para videojuegos.',
     tags: ['Python', 'PgZero'],
   },
@@ -44,8 +48,27 @@ export const projectsData = [
     file: 'pide-valle/',
     image: '/assets/pidevalle.png',
     link: null,
+    github: null,
     desc: 'Delivery integral para clientes, negocios y repartidores.',
     tags: ['Node.js', 'MongoDB', 'Express'],
+  },
+];
+
+export const achievementsData = [
+  {
+    icon: 'fas fa-trophy',
+    title: 'Finalista Hackathon 2023',
+    desc: 'Tercer lugar en Hackathon de Innovación Tecnológica Ambiental DATIC Cali 2023.',
+  },
+  {
+    icon: 'fas fa-chalkboard-teacher',
+    title: 'Docencia',
+    desc: 'Profesor de desarrollo de Software en Kodland desde 2023.',
+  },
+  {
+    icon: 'fas fa-microphone',
+    title: 'Panelista Invitado',
+    desc: 'Participación como Panelista en Hackathon CIADET Cali 2023.',
   },
 ];
 

@@ -9,12 +9,13 @@ const AboutSection = lazy(() => import('./components/AboutSection'));
 const ProjectsSection = lazy(() => import('./components/ProjectsSection'));
 const SkillsSection = lazy(() => import('./components/SkillsSection'));
 const ContactSection = lazy(() => import('./components/ContactSection'));
-import { 
-  initSmoothScroll, 
-  destroySmoothScroll, 
-  animateText, 
-  initFloatingPhysics 
+import {
+  initSmoothScroll,
+  destroySmoothScroll,
+  animateText,
+  initFloatingPhysics
 } from './script';
+import gsap from 'gsap';
 
 /**
  * Root application component.
@@ -30,11 +31,30 @@ export default function App() {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, []);
 
-  // Track scroll progress
+  // Track scroll progress and Custom Cursor
   useEffect(() => {
     // Initialize Lenis & GSAP ScrollSmoother logic
     initSmoothScroll();
+
+    // Custom Cursor Logic
+    const cursor = document.querySelector('.custom-cursor');
+    const follower = document.querySelector('.custom-cursor-follower');
     
+    const moveCursor = (e) => {
+      gsap.to(cursor, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.1
+      });
+      gsap.to(follower, {
+        x: e.clientX - 10,
+        y: e.clientY - 10,
+        duration: 0.3
+      });
+    };
+
+    window.addEventListener('mousemove', moveCursor);
+
     // Initialize text and physics animations after initial render
     setTimeout(() => {
       animateText('.section-heading');
@@ -50,6 +70,7 @@ export default function App() {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', moveCursor);
       destroySmoothScroll();
     };
   }, []);
@@ -79,6 +100,9 @@ export default function App() {
         <div className="grid-lines"></div>
         <div className="noise-layer"></div>
       </div>
+
+      <div className="custom-cursor"></div>
+      <div className="custom-cursor-follower"></div>
 
       <DockNav currentSection={currentSection} onNavigate={scrollTo} />
       <ScrollHelper currentSection={currentSection} onNavigate={scrollTo} />
