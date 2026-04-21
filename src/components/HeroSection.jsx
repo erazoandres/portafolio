@@ -1,38 +1,20 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { heroLinesData } from '../data';
 import TerminalCard from './TerminalCard';
 
 const NAME_TEXT = 'Andrés Erazo';
-const GLITCH_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*';
 
 /**
  * Hero section with optimized GSAP animations, 
  * interactive glitch name and terminal typing effect.
  */
 export default function HeroSection({ onNavigate }) {
-  const [glitchedName, setGlitchedName] = useState(NAME_TEXT);
   const [visibleLines, setVisibleLines] = useState([]);
   const containerRef = useRef(null);
 
-  // Optimized Glitch Effect
-  const handleGlitch = useCallback(() => {
-    let iteration = 0;
-    const interval = setInterval(() => {
-      setGlitchedName(
-        NAME_TEXT.split('')
-          .map((letter, index) => {
-            if (index < iteration) return NAME_TEXT[index];
-            if (letter === ' ') return ' ';
-            return GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)];
-          })
-          .join('')
-      );
-      if (iteration >= NAME_TEXT.length) clearInterval(interval);
-      iteration += 1 / 3;
-    }, 30);
-  }, []);
+
 
   useGSAP(() => {
     // Initial reveal animations
@@ -83,7 +65,6 @@ export default function HeroSection({ onNavigate }) {
     };
 
     gsap.delayedCall(1.2, typeNextLine);
-    gsap.delayedCall(0.5, handleGlitch);
 
   }, { scope: containerRef });
 
@@ -92,19 +73,19 @@ export default function HeroSection({ onNavigate }) {
       <div className="hero-layout">
         <div className="hero-intro">
           <div className="hero-badge">
-            <span className="status-dot"></span> Disponible para proyectos
+            <span className="status-dot"></span> Disponibilidad para proyectos estratégicos
           </div>
 
-          <h1 className="hero-name" onMouseOver={handleGlitch}>
-            {glitchedName}
+          <h1 className="hero-name">
+            {NAME_TEXT}
           </h1>
 
           <p className="hero-role">
-            Full Stack Developer <span className="caret">|</span>
+            Senior Frontend Engineer <span className="caret">|</span>
           </p>
 
           <p className="hero-desc">
-            Arquitecto de experiencias digitales de alto rendimiento. Especializado en crear interfaces inmersivas que fusionan ingeniería robusta con un diseño visual impecable.
+            Especializado en la intersección del diseño premium y la ingeniería de alto rendimiento. Construyo ecosistemas digitales inmersivos, Agentes AI y automatizaciones avanzadas con n8n, Slack y Google Workspace.
           </p>
 
           <div className="hero-actions">

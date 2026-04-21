@@ -13,7 +13,8 @@ import {
   initSmoothScroll,
   destroySmoothScroll,
   animateText,
-  initFloatingPhysics
+  initFloatingPhysics,
+  scrollToTarget
 } from './script';
 import gsap from 'gsap';
 
@@ -24,11 +25,9 @@ import gsap from 'gsap';
  */
 export default function App() {
   const [currentSection, setCurrentSection] = useState('hero');
-  const [scrollProgress, setScrollProgress] = useState(0);
 
   const scrollTo = useCallback((id) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    scrollToTarget(`#${id}`);
   }, []);
 
   // Track scroll progress and Custom Cursor
@@ -36,41 +35,73 @@ export default function App() {
     // Initialize Lenis & GSAP ScrollSmoother logic
     initSmoothScroll();
 
-    // Custom Cursor Logic
+    // Custom Cursor Logic with quickSetter for high-performance tracking
     const cursor = document.querySelector('.custom-cursor');
     const follower = document.querySelector('.custom-cursor-follower');
     
+    if (!cursor || !follower) return;
+
+    // Mouse Tracking Logic
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    const xSetter = gsap.quickSetter(cursor, "x", "px");
+    const ySetter = gsap.quickSetter(cursor, "y", "px");
+    const xFollowerSetter = gsap.quickSetter(follower, "x", "px");
+    const yFollowerSetter = gsap.quickSetter(follower, "y", "px");
+
     const moveCursor = (e) => {
-      gsap.to(cursor, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.1
-      });
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    };
+
+    const updateFrame = () => {
+      // Set CSS variables for background spotlight effect (only once per frame)
+      document.documentElement.style.setProperty('--mouse-x', `${mouseX}px`);
+      document.documentElement.style.setProperty('--mouse-y', `${mouseY}px`);
+
+      xSetter(mouseX - 5);
+      ySetter(mouseY - 5);
+      
+      // Follower with a slight lag (LERP-like smoothing via GSAP quickSetter)
       gsap.to(follower, {
-        x: e.clientX - 10,
-        y: e.clientY - 10,
-        duration: 0.3
+        x: mouseX - 20,
+        y: mouseY - 20,
+        duration: 0.4,
+        overwrite: 'auto',
+        ease: 'power2.out'
       });
     };
 
-    window.addEventListener('mousemove', moveCursor);
+    // Use GSAP ticker for synchronized updates with screen refresh rate
+    gsap.ticker.add(updateFrame);
+
+    window.addEventListener('mousemove', moveCursor, { passive: true });
 
     // Initialize text and physics animations after initial render
     setTimeout(() => {
       animateText('.section-heading');
       initFloatingPhysics('.about-icon, .hero-badge');
-    }, 100);
+      // Refresh ScrollTrigger to account for lazy-loaded content
+      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => ScrollTrigger.refresh());
+    }, 500);
 
-    const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (window.scrollY / totalHeight) * 100;
-      setScrollProgress(progress);
-    };
+    // GSAP ScrollTrigger for Progress Bar (Replacing React state to avoid main thread blocking)
+    gsap.to('.scroll-progress-bar', {
+      scaleX: 1,
+      transformOrigin: 'left center',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: document.documentElement,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: true,
+      }
+    });
 
-    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', moveCursor);
+      gsap.ticker.remove(updateFrame);
       destroySmoothScroll();
     };
   }, []);
@@ -80,22 +111,38 @@ export default function App() {
     const sectionObs = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
             setCurrentSection(entry.target.id);
           }
         });
       },
-      { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
+      { rootMargin: '-10% 0px -10% 0px', threshold: [0.1, 0.3, 0.5] }
     );
 
     document.querySelectorAll('.section').forEach((el) => sectionObs.observe(el));
 
-    return () => sectionObs.disconnect();
+    const handleScrollBoundaries = () => {
+      const scrollY = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      
+      if (scrollY < 100) {
+        setCurrentSection('hero');
+      } else if (scrollY > maxScroll - 150) {
+        setCurrentSection('contact');
+      }
+    };
+
+    window.addEventListener('scroll', handleScrollBoundaries, { passive: true });
+
+    return () => {
+      sectionObs.disconnect();
+      window.removeEventListener('scroll', handleScrollBoundaries);
+    };
   }, []);
 
   return (
     <div className="app-shell">
-      <div className="scroll-progress-bar" style={{ width: `${scrollProgress}%` }}></div>
+      <div className="scroll-progress-bar"></div>
       <div className="void-bg">
         <div className="grid-lines"></div>
         <div className="noise-layer"></div>

@@ -11,7 +11,7 @@ export default function SkillsSection() {
       <FadeIn as="span" className="section-label">skills</FadeIn>
       <FadeIn as="h2" className="section-heading">Stack Técnico</FadeIn>
 
-      <div className="bento-grid bento-grid-2 stagger-children">
+      <div className="bento-grid bento-grid-skills stagger-children">
         {skillGroupsData.map((group) => (
           <FadeIn key={group.file}>
             <TerminalCard filename={group.file} className="skills-card">

@@ -10,7 +10,7 @@ export const projectsData = [
   {
     title: 'Audit Studio',
     file: 'audit-studio/',
-    image: '/assets/nexus.png',
+    image: '/assets/nexus.webp',
     link: 'https://erazoandres.github.io/Audit-Studio/index.html',
     github: 'https://github.com/erazoandres/Audit-Studio',
     desc: 'Centro de control para gestión de grupos y análisis de pagos.',
@@ -19,7 +19,7 @@ export const projectsData = [
   {
     title: 'Kinetic Social',
     file: 'kinetic-social/',
-    image: '/assets/kinect.png',
+    image: '/assets/kinect.webp',
     link: 'https://erazoandres.github.io/KINETIC-SOCIAL/',
     github: 'https://github.com/erazoandres/KINETIC-SOCIAL',
     desc: 'Plataforma para proyectos sociales e impacto comunitario.',
@@ -28,7 +28,7 @@ export const projectsData = [
   {
     title: 'Quantum Notes',
     file: 'quantum-notes/',
-    image: 'https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=600&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=1000&auto=format&fit=crop',
     link: null,
     github: null,
     desc: 'App de notas con encriptación avanzada y sincronización real.',
@@ -37,7 +37,7 @@ export const projectsData = [
   {
     title: 'MapBuilder',
     file: 'map-builder/',
-    image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=600&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop',
     link: 'https://erazoandres.github.io/mapBuilder/',
     github: 'https://github.com/erazoandres/mapBuilder',
     desc: 'Editor de niveles por capas para videojuegos.',
@@ -46,7 +46,7 @@ export const projectsData = [
   {
     title: 'PideValle',
     file: 'pide-valle/',
-    image: '/assets/pidevalle.png',
+    image: '/assets/pidevalle.webp',
     link: null,
     github: null,
     desc: 'Delivery integral para clientes, negocios y repartidores.',
@@ -89,6 +89,10 @@ export const skillGroupsData = [
     file: 'devops.yml',
     skills: [{ name: 'Git' }, { name: 'Docker' }, { name: 'Linux' }],
   },
+  {
+    file: 'intelligence.json',
+    skills: [{ name: 'AI Agents' }, { name: 'n8n Workflows' }, { name: 'Slack APIs' }, { name: 'Google Workspace' }],
+  },
 ];
 
 export const heroLinesData = [
@@ -96,7 +100,7 @@ export const heroLinesData = [
   { type: 'cmd', text: 'whoami' },
   { type: 'output', text: 'Andrés Erazo — Full Stack Developer' },
   { type: 'cmd', text: 'cat stack.txt' },
-  { type: 'output-secondary', text: 'React · Vue · Node.js · Python' },
+  { type: 'output-secondary', text: 'React · n8n · AI Agents · APIs' },
   { type: 'cmd', text: 'echo $STATUS' },
   { type: 'output', text: 'Disponible para nuevos retos' },
 ];
