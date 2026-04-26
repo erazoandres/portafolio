@@ -83,7 +83,7 @@ export default function HeroSection({ onNavigate }) {
       <div className="hero-layout">
         <div className="hero-intro">
           <div className="hero-badge">
-            <span className="status-dot"></span> Disponibilidad para proyectos estratégicos
+            <span className="status-dot"></span> Disponible, ¿qué tienes en mente?
           </div>
 
           <h1 className="hero-name">

@@ -7,6 +7,7 @@ import ScrollHelper from './components/ScrollHelper';
 // Lazy load below-the-fold sections to improve initial load time
 const AboutSection = lazy(() => import('./components/AboutSection'));
 const ProjectsSection = lazy(() => import('./components/ProjectsSection'));
+const ApiService = lazy(() => import('./components/ApiService'));
 const SkillsSection = lazy(() => import('./components/SkillsSection'));
 const ContactSection = lazy(() => import('./components/ContactSection'));
 import {
@@ -159,6 +160,7 @@ export default function App() {
         <Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.5)' }}>Cargando sección...</div>}>
           <AboutSection />
           <ProjectsSection />
+          <ApiService />
           <SkillsSection />
           <ContactSection />
         </Suspense>

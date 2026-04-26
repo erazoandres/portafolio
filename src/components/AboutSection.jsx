@@ -65,32 +65,7 @@ export default function AboutSection() {
         </FadeIn>
       </div>
 
-      {/* Achievements row — matches live portfolio "Logros y Reconocimientos" */}
-      <div className="achievements-row stagger-children">
-        <FadeIn>
-          <div className="achievements-header">
-            <span className="section-label" style={{ marginBottom: 0 }}>logros</span>
-            <h3 className="achievements-title">Logros y Reconocimientos</h3>
-          </div>
-        </FadeIn>
-        <div className="achievements-grid">
-          {achievementsData.map((item) => (
-            <FadeIn key={item.title}>
-              <TerminalCard filename={`${item.title.toLowerCase().replace(/\s+/g, '-')}.md`}>
-                <div className="achievement-item">
-                  <div className="achievement-icon">
-                    <i className={item.icon}></i>
-                  </div>
-                  <div className="achievement-text">
-                    <h4 className="achievement-title">{item.title}</h4>
-                    <p className="achievement-desc">{item.desc}</p>
-                  </div>
-                </div>
-              </TerminalCard>
-            </FadeIn>
-          ))}
-        </div>
-      </div>
+
     </section>
   );
 }

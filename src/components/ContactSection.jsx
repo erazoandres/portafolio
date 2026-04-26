@@ -72,13 +72,18 @@ export default function ContactSection() {
            </div>
            
            <h2 className="contact-heading">
-             Hablemos de tu <br/>
-             <span className="text-glow">próximo éxito.</span>
-           </h2>
-           
-           <p className="contact-subheading">
-             ¿Tienes una idea audaz? Estoy listo para transformarla en una realidad digital de alto rendimiento.
-           </p>
+              ¿Listo para empezar? <br/>
+              Envíame un <span className="text-glow">mensaje.</span>
+            </h2>
+            
+            <p className="contact-subheading">
+              Toda gran idea comienza con una conversación. Cuéntame qué tienes en mente y hagámoslo realidad juntos.
+            </p>
+
+            <div className="response-time">
+              <i className="far fa-clock"></i>
+              <span>Respuesta garantizada en menos de 24h</span>
+            </div>
 
            <div className="contact-methods">
               <a href="mailto:erazoandres14@gmail.com" className="method-card group">

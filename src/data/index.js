@@ -2,6 +2,7 @@ export const sectionsNav = [
   { id: 'hero', icon: 'fas fa-home', label: 'Inicio' },
   { id: 'about', icon: 'fas fa-user', label: 'Sobre Mí' },
   { id: 'projects', icon: 'fas fa-code', label: 'Proyectos' },
+  { id: 'services', icon: 'fas fa-server', label: 'Servicios' },
   { id: 'skills', icon: 'fas fa-chart-bar', label: 'Skills' },
   { id: 'contact', icon: 'fas fa-paper-plane', label: 'Contacto' },
 ];
@@ -72,14 +73,33 @@ export const achievementsData = [
   },
 ];
 
+export const productionStackData = {
+  title: 'Stack de Producción',
+  description: 'Mi metodología se basa en la velocidad y el rendimiento. Utilizo React 19 y Vite para el core, GSAP para experiencias inmersivas, y n8n para orquestar la inteligencia de negocio.',
+  highlights: ['High Performance', 'Scalable Architecture', 'AI-Driven Workflows']
+};
+
 export const skillGroupsData = [
   {
     file: 'frontend.config.js',
-    skills: [{ name: 'React' }, { name: 'JavaScript' }, { name: 'Vue.js' }, { name: 'HTML/CSS' }],
+    skills: [
+      { name: 'Next.js (El cerebro Fullstack)' },
+      { name: 'React' },
+      { name: 'Tailwind CSS (El diseño veloz)' },
+      { name: 'JavaScript' },
+      { name: 'Astro' },
+      { name: 'HTML/CSS' }
+    ],
   },
   {
     file: 'backend.env',
-    skills: [{ name: 'Node.js' }, { name: 'Python' }, { name: 'SQL' }, { name: 'MongoDB' }],
+    skills: [
+      { name: 'Node.js' },
+      { name: 'Supabase (El "Backend-as-a-Service")' },
+      { name: 'Python' },
+      { name: 'SQL' },
+      { name: 'MongoDB' }
+    ],
   },
   {
     file: 'design.scss',
@@ -97,10 +117,10 @@ export const skillGroupsData = [
 
 export const heroLinesData = [
   { type: 'comment', text: '// Iniciando sistema...' },
-  { type: 'cmd', text: 'whoami' },
-  { type: 'output', text: 'Andrés Erazo — Full Stack Developer' },
-  { type: 'cmd', text: 'cat stack.txt' },
-  { type: 'output-secondary', text: 'React · n8n · AI Agents · APIs' },
+  { type: 'cmd', text: '¿quien soy?' },
+  { type: 'output', text: 'Andrés Erazo — Senior Frontend Engineer' },
+  { type: 'cmd', text: '¿qué ofrezco?' },
+  { type: 'output-secondary', text: 'Web Apps · AI Agents · n8n · APIs · Consultancy' },
   { type: 'cmd', text: 'echo $STATUS' },
-  { type: 'output', text: 'Disponible para nuevos retos' },
+  { type: 'output', text: 'Disponible solo para proyectos ambiciosos y muy cool 😎' },
 ];

@@ -11,23 +11,53 @@ export default function ProjectsSection() {
   const containerRef = useRef(null);
 
   useGSAP(() => {
-    gsap.from('.project-item', {
-      y: 60,
-      opacity: 0,
-      stagger: 0.3,
-      duration: 1,
-      ease: 'power4.out',
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top 70%',
-      }
+    const items = gsap.utils.toArray('.project-item');
+    
+    items.forEach((item, i) => {
+      const isEven = i % 2 === 0;
+      const img = item.querySelector('.project-image-container');
+      const content = item.querySelector('.project-content');
+      
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        }
+      });
+
+      tl.from(img, {
+        x: isEven ? -100 : 100,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'power4.out',
+      })
+      .from(content.children, {
+        x: isEven ? 50 : -50,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: 'power3.out',
+      }, '-=0.8');
+      
+      // Add subtle parallax to the image while scrolling
+      gsap.to(img.querySelector('img'), {
+        yPercent: 20,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: item,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+        }
+      });
     });
   }, { scope: containerRef });
 
   return (
     <section id="projects" className="section" ref={containerRef}>
-      <span className="section-label">Selected Works</span>
-      <h2 className="section-heading">Proyectos destacados</h2>
+      <span className="section-label">Proyectos Realizados</span>
+      <h2 className="section-heading">Showcase de trabajos</h2>
 
       <div className="projects-showcase">
         {projectsData.map((project, index) => (
