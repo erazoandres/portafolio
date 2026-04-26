@@ -13,7 +13,9 @@ const NAME_TEXT = 'Andrés Erazo';
 export default function HeroSection({ onNavigate }) {
   const [visibleLines, setVisibleLines] = useState([]);
   const [displayedRole, setDisplayedRole] = useState('');
+  const [glitchedName, setGlitchedName] = useState(NAME_TEXT);
   const ROLE_TEXT = 'Senior Frontend Engineer';
+  const GLITCH_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*';
   const containerRef = useRef(null);
 
 
@@ -22,8 +24,27 @@ export default function HeroSection({ onNavigate }) {
     // Initial reveal animations
     const tl = gsap.timeline();
     
-    tl.from('.hero-badge', { y: -20, opacity: 0, duration: 0.6 })
-      .from('.hero-name', { y: 30, opacity: 0, duration: 0.8, ease: 'back.out(1.7)' }, '-=0.4')
+    // Glitch effect at the start
+    const glitchProxy = { progress: 0 };
+    tl.to(glitchProxy, {
+      progress: 1,
+      duration: 1,
+      ease: 'none',
+      onUpdate: () => {
+        const p = glitchProxy.progress;
+        setGlitchedName(
+          NAME_TEXT.split('').map((char, i) => {
+            if (char === ' ') return ' ';
+            // As progress increases, letters "settle" from left to right
+            if (p > (i / NAME_TEXT.length)) return char;
+            return GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)];
+          }).join('')
+        );
+      }
+    });
+
+    tl.from('.hero-badge', { y: -20, opacity: 0, duration: 0.6 }, 0)
+      .from('.hero-name', { y: 30, opacity: 0, duration: 0.8, ease: 'back.out(1.7)' }, 0)
       .to({}, {
         duration: 1.2,
         onUpdate: function() {
@@ -87,7 +108,7 @@ export default function HeroSection({ onNavigate }) {
           </div>
 
           <h1 className="hero-name">
-            {NAME_TEXT}
+            {glitchedName}
           </h1>
 
           <p className="hero-role">
