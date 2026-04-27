@@ -310,11 +310,16 @@ img {
 }
 
 .term-body {
-  padding: 1rem 1.25rem;
+  padding: clamp(0.9rem, 2vw, 1.25rem);
   display: flex;
   flex-direction: column;
+  gap: 0.6rem;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(6px) saturate(120%);
 }
-
 .term-body h3 {
   font-size: 1.35rem;
   font-weight: 700;
@@ -327,6 +332,32 @@ img {
   color: var(--text-secondary);
   font-size: 0.95rem;
   line-height: 1.7;
+}
+
+/* JSON / code viewer inside terminal cards */
+.term-body .json-viewer,
+.term-body pre,
+.term-body code {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.03);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  overflow: auto;
+  max-height: 320px;
+  white-space: pre-wrap;
+}
+
+/* Reduce visual noise for compact skill cards */
+.skills-card .term-body {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.9rem 1rem;
 }
 
 /* ─── DOCK NAV ─── */

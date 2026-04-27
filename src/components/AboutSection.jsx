@@ -11,7 +11,6 @@ export default function AboutSection() {
       <FadeIn as="span" className="section-label">about</FadeIn>
       <FadeIn as="h2" className="section-heading">Conóceme</FadeIn>
       <FadeIn as="p" className="section-desc">
-        Desarrollador con mentalidad de producto. Código funcional y experiencias memorables.
       </FadeIn>
 
       <div className="bento-grid bento-grid-3 stagger-children">
@@ -22,8 +21,7 @@ export default function AboutSection() {
             </div>
             <h3>Mi Historia</h3>
             <p>
-              Más de 5 años construyendo experiencias web. Empecé con curiosidad, ahora es pasión.
-              Especializado en React, Node.js y diseño UI/UX.
+Más de 10 años convirtiendo ideas en productos digitales que la gente disfruta usar. Trabajo con fundadores, empresas y equipos que saben lo que quieren lograr, pero necesitan a alguien que lo haga realidad — con criterio, con calidad y sin vueltas. Si tu producto tiene que verse bien y funcionar mejor, estás en el lugar correcto. 
             </p>
           </TerminalCard>
         </FadeIn>
@@ -35,8 +33,7 @@ export default function AboutSection() {
             </div>
             <h3>Mi Enfoque</h3>
             <p>
-              Diseño centrado en el usuario, código limpio y soluciones escalables. Diseño premium y
-              rendimiento excepcional.
+             No entrego código, entrego resultados. Cada proyecto arranca entendiendo el negocio detrás: quién es el usuario, qué necesita y cómo tu producto puede ganar su confianza desde el primer clic. Diseño premium, rendimiento sólido y entregas que no necesitan retrabajo. Así es como trabajo — y por eso mis clientes vuelven.
             </p>
           </TerminalCard>
         </FadeIn>

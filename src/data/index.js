@@ -83,9 +83,9 @@ export const skillGroupsData = [
   {
     file: 'frontend.config.js',
     skills: [
-      { name: 'Next.js (El cerebro Fullstack)' },
+      { name: 'Next.js' },
       { name: 'React' },
-      { name: 'Tailwind CSS (El diseño veloz)' },
+      { name: 'Tailwind CSS' },
       { name: 'JavaScript' },
       { name: 'Astro' },
       { name: 'HTML/CSS' }
@@ -95,7 +95,7 @@ export const skillGroupsData = [
     file: 'backend.env',
     skills: [
       { name: 'Node.js' },
-      { name: 'Supabase (El "Backend-as-a-Service")' },
+      { name: 'Supabase' },
       { name: 'Python' },
       { name: 'SQL' },
       { name: 'MongoDB' }
@@ -120,7 +120,7 @@ export const heroLinesData = [
   { type: 'cmd', text: '¿quien soy?' },
   { type: 'output', text: 'Andrés Erazo — Senior Frontend Engineer' },
   { type: 'cmd', text: '¿qué ofrezco?' },
-  { type: 'output-secondary', text: 'Web Apps · AI Agents · n8n · APIs · Consultancy' },
+    { type: 'output-secondary', text: 'Web Apps · AI Agents · n8n Automation · APIs · Consultancy · Apps Android · Web Sites' },
   { type: 'cmd', text: 'echo $STATUS' },
   { type: 'output', text: 'Disponible solo para proyectos ambiciosos y muy cool 😎' },
 ];
