@@ -399,6 +399,93 @@ img {
   outline-offset: 4px;
 }
 
+/* Enhanced service card visuals */
+.services-section {
+  position: relative;
+}
+
+.services-ambient {
+  position: absolute;
+  inset: -40% -10% auto -10%;
+  height: 320px;
+  background: radial-gradient(600px circle at 15% 30%, rgba(168,85,247,0.06), transparent 20%), radial-gradient(400px circle at 85% 60%, rgba(245,158,11,0.04), transparent 25%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.service-card {
+  transition: transform var(--transition-spring), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+  will-change: transform, box-shadow;
+}
+
+.service-card .service-card-inner {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.service-icon-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent-secondary), var(--accent));
+  box-shadow: 0 8px 30px rgba(168,85,247,0.08), 0 0 18px rgba(245,158,11,0.06);
+  flex-shrink: 0;
+}
+
+.service-card:hover {
+  transform: translateY(-10px) scale(1.01);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.65), 0 0 40px rgba(168,85,247,0.06);
+  border-color: rgba(168,85,247,0.12);
+}
+
+.service-body h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.2rem;
+}
+
+.service-desc {
+  color: var(--text-secondary);
+  margin-bottom: 0.6rem;
+}
+
+.service-features {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem 1rem;
+  margin: 0.6rem 0;
+  padding: 0;
+}
+
+.service-features li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.service-features .feature-dot {
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+
+/* CTA visual tweak inside terminal cards */
+.service-actions .btn {
+  padding: 0.5rem 0.85rem;
+}
+
+@media (max-width: 720px) {
+  .service-card .service-card-inner { flex-direction: column; align-items: flex-start; }
+  .service-features { grid-template-columns: 1fr; }
+}
+
 /* ─── DOCK NAV ─── */
 .dock-nav {
   position: fixed;

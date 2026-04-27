@@ -134,6 +134,7 @@ export const servicesData = [
     desc: 'Landing pages, sitios corporativos y tiendas con foco en UX, SEO y rendimiento. Entrego sitios responsivos y optimizados para tráfico real.',
     cta: 'Solicitar presupuesto',
     projectsLink: null,
+    features: ['Diseño responsive', 'SEO técnico', 'CMS cuando aplica'],
   },
   {
     title: 'Aplicaciones',
@@ -143,6 +144,7 @@ export const servicesData = [
     desc: 'Web apps y móviles con arquitectura escalable, APIs bien diseñadas y despliegue continuo. Priorizo calidad de producto y experiencia de usuario.',
     cta: 'Contáctame — hablemos',
     projectsLink: null,
+    features: ['APIs REST/GraphQL', 'Testing & CI/CD', 'Despliegue escalable'],
   },
   {
     title: 'Automatizaciones',
@@ -152,6 +154,7 @@ export const servicesData = [
     desc: 'Integraciones, bots y orquestación (n8n, Zapier, scripts a medida) para reducir errores manuales y acelerar operaciones.',
     cta: 'Solicitar automatización',
     projectsLink: null,
+    features: ['n8n / Zapier', 'Integración de APIs', 'Monitoreo y alertas'],
   },
   {
     title: 'Portales para negocio',
@@ -161,5 +164,6 @@ export const servicesData = [
     desc: 'Dashboards, CRMs y portales de clientes con seguridad y roles. Construyo paneles que ayudan a tomar decisiones con datos reales.',
     cta: 'Ver opciones',
     projectsLink: null,
+    features: ['Roles y permisos', 'Analítica integrada', 'Integración con ERPs'],
   },
 ];
