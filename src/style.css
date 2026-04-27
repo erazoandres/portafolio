@@ -241,7 +241,7 @@ img {
   left: -150%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.08), transparent);
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.04), transparent);
   transform: skewX(-25deg);
   pointer-events: none;
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -266,7 +266,7 @@ img {
   gap: 0.75rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
-  z-index: 3;
+  z-index: 6;
 }
 
 .term-dots {
@@ -319,6 +319,8 @@ img {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
   backdrop-filter: blur(6px) saturate(120%);
+  position: relative;
+  z-index: 5;
 }
 .term-body h3 {
   font-size: 1.35rem;
