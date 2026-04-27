@@ -220,6 +220,10 @@ img {
   display: flex;
   flex-direction: column;
   height: 100%;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translateZ(0);
 }
 
 /* Glass edge inner highlight */
@@ -249,9 +253,9 @@ img {
 }
 
 .term-card:hover {
-  transform: translateY(-8px) scale(1.02) rotateX(2deg) rotateY(-2deg);
-  border-color: rgba(245, 158, 11, 0.3);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(245, 158, 11, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  transform: translateY(-6px) translateZ(0);
+  border-color: rgba(245, 158, 11, 0.25);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.6), 0 0 28px rgba(245, 158, 11, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.12);
 }
 
 .term-card:hover::before {
@@ -441,8 +445,8 @@ img {
 }
 
 .service-card:hover {
-  transform: translateY(-10px) scale(1.01);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.65), 0 0 40px rgba(168,85,247,0.06);
+  transform: translateY(-8px) translateZ(0);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 36px rgba(168,85,247,0.05);
   border-color: rgba(168,85,247,0.12);
 }
 
