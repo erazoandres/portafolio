@@ -1,5 +1,4 @@
-import { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
+import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { projectsData } from '../data';
 
@@ -10,39 +9,52 @@ import { projectsData } from '../data';
 export default function ProjectsSection() {
   const containerRef = useRef(null);
 
-    useGSAP(() => {
-    const items = gsap.utils.toArray('.project-item');
-    
-    // Animate the entire grid staggering items
-    gsap.from(items, {
-      y: 50,
-      opacity: 0,
-      stagger: 0.15,
-      duration: 0.8,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top 75%',
-      }
-    });
+  useEffect(() => {
+    if (!containerRef.current) return;
 
-    // Subtle image parallax effect per card
-    items.forEach((item) => {
-      const img = item.querySelector('img');
-      if (img) {
-        gsap.to(img, {
-          yPercent: 15,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: item,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
+    const scopeElement = containerRef.current;
+    const ctx = gsap.context(() => {
+      const items = gsap.utils.toArray('.project-item');
+      if (!items || items.length === 0) return;
+
+      const prefersReduced = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
+
+      // Animate the entire grid with softer values
+      gsap.from(items, {
+        y: 20,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.6,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: scopeElement,
+          start: 'top 75%',
+        }
+      });
+
+      // Parallax only on desktop and when motion is allowed
+      if (!prefersReduced && isDesktop) {
+        items.forEach((item) => {
+          const img = item.querySelector('img');
+          if (img) {
+            gsap.to(img, {
+              yPercent: 8,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: item,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true,
+              }
+            });
           }
         });
       }
-    });
-  }, { scope: containerRef });
+    }, scopeElement);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section id="projects" className="section" ref={containerRef}>

@@ -616,6 +616,21 @@ img {
   }
 }
 
+/* Respect users who prefer reduced motion: disable heavy animations and scroll-based effects */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .project-item,
+  .project-image-container img {
+    transition: none !important;
+  }
+}
+
 /* Hero 3D Area */
 .hero-3d-wrapper {
   position: relative;
@@ -1708,6 +1723,13 @@ img {
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
+
+.stack-highlight-card {
+  background: rgba(245, 158, 11, 0.02);
+  border: 1px solid rgba(245, 158, 11, 0.1);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
 .stack-highlight-content {
   padding: 1.25rem;
 }
@@ -2240,4 +2262,4 @@ img {
   color: var(--accent);
   width: 20px;
 }
-
+

@@ -6,6 +6,7 @@ import SplitType from 'split-type';
 gsap.registerPlugin(ScrollTrigger);
 
 let lenis;
+let _lenisTicker = null;
 
 /**
  * Initializes Smooth Scroll using Lenis and syncs it with GSAP ScrollTrigger.
@@ -26,10 +27,21 @@ export const initSmoothScroll = () => {
   });
 
   lenis.on('scroll', ScrollTrigger.update);
+  // Add a safe ticker callback that checks `lenis` before calling `raf`.
+  _lenisTicker = (time) => {
+    if (lenis && typeof lenis.raf === 'function') {
+      try {
+        lenis.raf(time * 1000);
+      } catch (e) {
+        // swallow errors to avoid uncaught exceptions breaking the ticker
+        // but log for debugging in development
+        // eslint-disable-next-line no-console
+        console.warn('lenis.raf error:', e);
+      }
+    }
+  };
 
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
+  gsap.ticker.add(_lenisTicker);
 
   gsap.ticker.lagSmoothing(0);
 };
@@ -60,6 +72,15 @@ export const destroySmoothScroll = () => {
   if (lenis) {
     lenis.destroy();
     lenis = null;
+  }
+  // Remove ticker callback if it was registered
+  if (_lenisTicker) {
+    try {
+      gsap.ticker.remove(_lenisTicker);
+    } catch (e) {
+      // ignore
+    }
+    _lenisTicker = null;
   }
 };
 
