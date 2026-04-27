@@ -124,3 +124,42 @@ export const heroLinesData = [
   { type: 'cmd', text: 'echo $STATUS' },
   { type: 'output', text: 'Disponible solo para proyectos ambiciosos y muy cool 😎' },
 ];
+
+export const servicesData = [
+  {
+    title: 'Páginas web',
+    file: 'websites.md',
+    icon: 'fas fa-globe',
+    tagline: 'Presencia & conversión',
+    desc: 'Landing pages, sitios corporativos y tiendas con foco en UX, SEO y rendimiento. Entrego sitios responsivos y optimizados para tráfico real.',
+    cta: 'Solicitar presupuesto',
+    projectsLink: null,
+  },
+  {
+    title: 'Aplicaciones',
+    file: 'apps.md',
+    icon: 'fas fa-mobile-alt',
+    tagline: 'Productos interactivos',
+    desc: 'Web apps y móviles con arquitectura escalable, APIs bien diseñadas y despliegue continuo. Priorizo calidad de producto y experiencia de usuario.',
+    cta: 'Contáctame — hablemos',
+    projectsLink: null,
+  },
+  {
+    title: 'Automatizaciones',
+    file: 'automation.yml',
+    icon: 'fas fa-robot',
+    tagline: 'Flujos que ahorran tiempo',
+    desc: 'Integraciones, bots y orquestación (n8n, Zapier, scripts a medida) para reducir errores manuales y acelerar operaciones.',
+    cta: 'Solicitar automatización',
+    projectsLink: null,
+  },
+  {
+    title: 'Portales para negocio',
+    file: 'portals.json',
+    icon: 'fas fa-building',
+    tagline: 'Gestión & datos',
+    desc: 'Dashboards, CRMs y portales de clientes con seguridad y roles. Construyo paneles que ayudan a tomar decisiones con datos reales.',
+    cta: 'Ver opciones',
+    projectsLink: null,
+  },
+];

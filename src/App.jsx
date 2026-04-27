@@ -7,6 +7,7 @@ import ScrollHelper from './components/ScrollHelper';
 // Lazy load below-the-fold sections to improve initial load time
 const AboutSection = lazy(() => import('./components/AboutSection'));
 const ProjectsSection = lazy(() => import('./components/ProjectsSection'));
+const ServicesSection = lazy(() => import('./components/ServicesSection'));
 // ApiService removed — real-time services panel disabled per request
 const SkillsSection = lazy(() => import('./components/SkillsSection'));
 const ContactSection = lazy(() => import('./components/ContactSection'));
@@ -159,6 +160,7 @@ export default function App() {
         <HeroSection onNavigate={scrollTo} />
         <Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.5)' }}>Cargando sección...</div>}>
           <AboutSection />
+          <ServicesSection />
           <ProjectsSection />
           <SkillsSection />
           <ContactSection />
