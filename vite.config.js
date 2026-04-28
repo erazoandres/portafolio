@@ -9,10 +9,12 @@ export default defineConfig({
     cssMinify: true,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom'],
-          'vendor-gsap': ['gsap', '@gsap/react'],
-          'vendor-utils': ['lenis', 'split-type']
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return null
+          if (id.includes('react') || id.includes('react-dom')) return 'vendor-react'
+          if (id.includes('gsap') || id.includes('@gsap')) return 'vendor-gsap'
+          if (id.includes('lenis') || id.includes('split-type')) return 'vendor-utils'
+          return null
         }
       }
     }
