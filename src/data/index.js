@@ -53,6 +53,15 @@ export const projectsData = [
     desc: 'Delivery integral para clientes, negocios y repartidores.',
     tags: ['Node.js', 'MongoDB', 'Express'],
   },
+  {
+    title: 'TutorAI',
+    file: 'tutorai/',
+    image: '/assets/tutorai-embedded.svg',
+    link: 'https://andreserazotutorai.vercel.app/',
+    github: null,
+    desc: 'Plataforma educativa dirigida a estudiantes de grados 5 a 11. TutorAI ofrece un tutor guiado e interactivo que facilita el aprendizaje y el autoaprendizaje mediante rutas de estudio sencillas, lecciones estructuradas y recursos prácticos. Diseñado para que el alumnado avance de manera autónoma y comprensible, con contenido adaptado a su nivel y seguimiento del progreso.',
+    tags: ['React', 'Vercel', 'AI'],
+  },
 ];
 
 export const achievementsData = [
