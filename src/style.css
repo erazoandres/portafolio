@@ -823,6 +823,12 @@ img {
   .project-image-container img {
     transition: none !important;
   }
+
+  .demo-placeholder-text {
+    animation: none !important;
+    border-right: 0;
+    clip-path: inset(0 0 0 0);
+  }
 }
 
 /* Hero 3D Area */
@@ -1583,6 +1589,13 @@ img {
   position: relative;
 }
 
+.input-group.has-demo input,
+.input-group.has-demo textarea {
+  position: relative;
+  z-index: 1;
+  caret-color: var(--accent);
+}
+
 .input-group input,
 .input-group textarea {
   width: 100%;
@@ -1613,6 +1626,70 @@ img {
   transform-origin: left top;
   background: transparent;
   padding: 0 0.2rem;
+  z-index: 3;
+}
+
+.input-group.has-demo:not(.has-value):not(:focus-within) label {
+  transform: translateY(-1.7rem) scale(0.8);
+  color: var(--accent);
+  background: var(--bg-card);
+  border-radius: 4px;
+}
+
+.demo-placeholder {
+  --demo-y: -50%;
+  position: absolute;
+  left: 1.2rem;
+  right: 1.2rem;
+  top: 50%;
+  z-index: 2;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.42);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.35;
+  overflow: hidden;
+  transform: translateY(var(--demo-y));
+  transition: opacity 0.28s ease, transform 0.28s ease, color 0.28s ease;
+}
+
+.textarea-group .demo-placeholder {
+  --demo-y: 0;
+  top: 1.18rem;
+  max-height: 2.7em;
+}
+
+.demo-placeholder-text {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid var(--accent);
+  clip-path: inset(0 100% 0 0);
+  animation: demo-type 2.6s steps(54, end) 0.15s both, demo-caret 0.85s step-end infinite;
+}
+
+.textarea-group .demo-placeholder-text {
+  display: -webkit-box;
+  white-space: normal;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.input-group:focus-within .demo-placeholder,
+.input-group.has-value .demo-placeholder {
+  opacity: 0;
+  transform: translateY(var(--demo-y)) translateX(6px);
+}
+
+@keyframes demo-type {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes demo-caret {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: var(--accent); }
 }
 
 .input-group input:focus,
@@ -2277,6 +2354,15 @@ img {
     white-space: normal;
     border-right: 0;
     animation: none;
+  }
+
+  .demo-placeholder {
+    font-size: 0.86rem;
+    right: 1rem;
+  }
+
+  .textarea-group .demo-placeholder {
+    max-height: 2.55em;
   }
 
   .dock-tooltip {
