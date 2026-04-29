@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { projectsData } from '../data';
 
@@ -8,6 +8,7 @@ import { projectsData } from '../data';
  */
 export default function ProjectsSection() {
   const containerRef = useRef(null);
+  const [openProject, setOpenProject] = useState(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -62,37 +63,68 @@ export default function ProjectsSection() {
       <h2 className="section-heading">Showcase de trabajos</h2>
 
       <div className="projects-showcase">
-        {projectsData.map((project, index) => (
-          <div key={project.title} className="project-item">
-            <div className="project-image-container">
-              <img src={project.image} alt={project.title} loading="lazy" />
-            </div>
-            
-            <div className="project-content">
-              <h3>{project.title}</h3>
-              <p>{project.desc}</p>
-              
-              <div className="project-tags">
-                {project.tags.map((tag) => (
-                  <span key={tag} className="project-tag">{tag}</span>
-                ))}
-              </div>
+        {projectsData.map((project) => {
+          const hasLongDescription = project.desc.length > 150;
+          const isOpen = openProject === project.title;
 
-              <div className="project-actions">
-                {project.link && (
-                  <a href={project.link} target="_blank" rel="noreferrer" className="btn btn-primary">
-                    Ver Proyecto Live
-                  </a>
+          return (
+            <div key={project.title} className={`project-item ${isOpen ? 'is-reading' : ''}`}>
+              <div className="project-image-container">
+                <img src={project.image} alt={project.title} loading="lazy" />
+              </div>
+              
+              <div className="project-content">
+                <h3>{project.title}</h3>
+                <p className="project-desc">{project.desc}</p>
+                {hasLongDescription && (
+                  <button
+                    type="button"
+                    className="project-read-more"
+                    onClick={() => setOpenProject(isOpen ? null : project.title)}
+                    aria-expanded={isOpen}
+                  >
+                    {isOpen ? 'Ocultar' : 'Ver mas'}
+                    <i className={`fas ${isOpen ? 'fa-chevron-up' : 'fa-chevron-right'}`} aria-hidden="true"></i>
+                  </button>
                 )}
-                {project.github && (
-                  <a href={project.github} target="_blank" rel="noreferrer" className="btn btn-ghost">
-                    GitHub
-                  </a>
+                
+                <div className="project-tags">
+                  {project.tags.map((tag) => (
+                    <span key={tag} className="project-tag">{tag}</span>
+                  ))}
+                </div>
+
+                <div className="project-actions">
+                  {project.link && (
+                    <a href={project.link} target="_blank" rel="noreferrer" className="btn btn-primary">
+                      Ver Proyecto Live
+                    </a>
+                  )}
+                  {project.github && (
+                    <a href={project.github} target="_blank" rel="noreferrer" className="btn btn-ghost">
+                      GitHub
+                    </a>
+                  )}
+                </div>
+
+                {hasLongDescription && (
+                  <div className="project-description-popover" aria-hidden={!isOpen}>
+                    <button
+                      type="button"
+                      className="project-popover-close"
+                      onClick={() => setOpenProject(null)}
+                      aria-label="Cerrar descripcion completa"
+                    >
+                      <i className="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                    <span className="project-popover-label">Descripcion completa</span>
+                    <p>{project.desc}</p>
+                  </div>
                 )}
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

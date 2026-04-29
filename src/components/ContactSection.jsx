@@ -1,7 +1,13 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useMagnetic } from '../hooks/useMagnetic';
+
+const sampleRequests = [
+  'Necesito una landing rapida para validar una idea SaaS.',
+  'Quiero automatizar reportes y conectar mis herramientas.',
+  'Busco renovar mi portfolio con una experiencia mas premium.',
+];
 
 /**
  * Premium Contact Section — Redesigned with advanced interactions, 
@@ -10,6 +16,7 @@ import { useMagnetic } from '../hooks/useMagnetic';
 export default function ContactSection() {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('idle'); // idle | sending | success
+  const [sampleIndex, setSampleIndex] = useState(0);
   
   const containerRef = useRef(null);
   
@@ -20,6 +27,13 @@ export default function ContactSection() {
 
   const handleChange = (e) => {
     setFormState({ ...formState, [e.target.id]: e.target.value });
+  };
+
+  const useSampleRequest = () => {
+    setFormState((current) => ({
+      ...current,
+      message: sampleRequests[sampleIndex],
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -58,6 +72,14 @@ export default function ContactSection() {
 
   }, { scope: containerRef });
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSampleIndex((current) => (current + 1) % sampleRequests.length);
+    }, 3600);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section id="contact" className="section premium-contact-section" ref={containerRef}>
       <div className="contact-ambient-glow"></div>
@@ -79,6 +101,18 @@ export default function ContactSection() {
             <p className="contact-subheading">
               Toda gran idea comienza con una conversación. Cuéntame qué tienes en mente y hagámoslo realidad juntos.
             </p>
+
+            <div className="request-simulator" aria-live="polite">
+              <div className="request-simulator-top">
+                <span>Solicitud ejemplo</span>
+                <i className="fas fa-wand-magic-sparkles" aria-hidden="true"></i>
+              </div>
+              <button type="button" className="request-sample" onClick={useSampleRequest}>
+                <span className="typing-text" key={sampleRequests[sampleIndex]}>
+                  {sampleRequests[sampleIndex]}
+                </span>
+              </button>
+            </div>
 
             <div className="response-time">
               <i className="far fa-clock"></i>
