@@ -125,15 +125,8 @@ export default function ContactSection() {
               <span>Respuesta garantizada en menos de 24h</span>
             </div>
 
-           <div className="contact-methods">
-              <a href="mailto:erazoandres14@gmail.com" className="method-card group">
-                 <div className="method-icon"><i className="fas fa-envelope"></i></div>
-                 <div className="method-text">
-                   <span className="method-label">Email</span>
-                   <span className="method-value">erazoandres14@gmail.com</span>
-                 </div>
-                 <div className="card-arrow"><i className="fas fa-arrow-right"></i></div>
-              </a>
+            <div className="contact-methods">
+              {/* email method removed per request */}
 
               <div className="social-methods">
                 <a 
