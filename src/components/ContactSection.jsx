@@ -3,10 +3,25 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useMagnetic } from '../hooks/useMagnetic';
 
-const sampleRequests = [
-  'Necesito una landing rapida para validar una idea SaaS.',
-  'Quiero automatizar reportes y conectar mis herramientas.',
-  'Busco renovar mi portfolio con una experiencia mas premium.',
+const demoScenarios = [
+  {
+    request: 'Necesito una landing rapida para validar una idea SaaS.',
+    name: 'Camila Rojas',
+    email: 'camila@marca.co',
+    message: 'Necesito una web elegante para captar clientes y medir conversiones.',
+  },
+  {
+    request: 'Quiero automatizar reportes y conectar mis herramientas.',
+    name: 'Diego Alvarez',
+    email: 'diego@operaciones.io',
+    message: 'Quiero automatizar reportes semanales y conectar mis herramientas.',
+  },
+  {
+    request: 'Busco renovar mi portfolio con una experiencia mas premium.',
+    name: 'Valentina Cruz',
+    email: 'valentina@edtech.com',
+    message: 'Busco una app educativa con dashboard y flujo de usuarios.',
+  },
 ];
 
 /**
@@ -24,6 +39,7 @@ export default function ContactSection() {
   const githubRef = useMagnetic({ strength: 30 });
   const linkedinRef = useMagnetic({ strength: 30 });
   const submitBtnRef = useMagnetic({ strength: 40 });
+  const currentDemo = demoScenarios[sampleIndex] || demoScenarios[0];
 
   const handleChange = (e) => {
     setFormState({ ...formState, [e.target.id]: e.target.value });
@@ -32,7 +48,7 @@ export default function ContactSection() {
   const useSampleRequest = () => {
     setFormState((current) => ({
       ...current,
-      message: sampleRequests[sampleIndex],
+      message: currentDemo.request,
     }));
   };
 
@@ -74,7 +90,7 @@ export default function ContactSection() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setSampleIndex((current) => (current + 1) % sampleRequests.length);
+      setSampleIndex((current) => (current + 1) % demoScenarios.length);
     }, 3600);
 
     return () => clearInterval(timer);
@@ -102,17 +118,7 @@ export default function ContactSection() {
               Toda gran idea comienza con una conversación. Cuéntame qué tienes en mente y hagámoslo realidad juntos.
             </p>
 
-            <div className="request-simulator" aria-live="polite">
-              <div className="request-simulator-top">
-                <span>Solicitud ejemplo</span>
-                <i className="fas fa-wand-magic-sparkles" aria-hidden="true"></i>
-              </div>
-              <button type="button" className="request-sample" onClick={useSampleRequest}>
-                <span className="typing-text" key={sampleRequests[sampleIndex]}>
-                  {sampleRequests[sampleIndex]}
-                </span>
-              </button>
-            </div>
+            {/* request-simulator removed per user request */}
 
             <div className="response-time">
               <i className="far fa-clock"></i>
@@ -175,7 +181,7 @@ export default function ContactSection() {
                 <h3 className="form-title">Proyectar ahora</h3>
                 
                 <div className="input-row">
-                    <div className="input-group">
+                    <div className={`input-group has-demo ${formState.name ? 'has-value' : ''}`}>
                         <input 
                           type="text" 
                           id="name" 
@@ -186,9 +192,14 @@ export default function ContactSection() {
                           disabled={status === 'sending'}
                         />
                         <label htmlFor="name">Nombre</label>
+                        <span className="demo-placeholder" aria-hidden="true">
+                          <span className="demo-placeholder-text" key={`name-${sampleIndex}`}>
+                            {currentDemo.name}
+                          </span>
+                        </span>
                         <div className="focus-border"></div>
                     </div>
-                    <div className="input-group">
+                    <div className={`input-group has-demo ${formState.email ? 'has-value' : ''}`}>
                         <input 
                           type="email" 
                           id="email" 
@@ -199,11 +210,16 @@ export default function ContactSection() {
                           disabled={status === 'sending'}
                         />
                         <label htmlFor="email">Email</label>
+                        <span className="demo-placeholder" aria-hidden="true">
+                          <span className="demo-placeholder-text" key={`email-${sampleIndex}`}>
+                            {currentDemo.email}
+                          </span>
+                        </span>
                         <div className="focus-border"></div>
                     </div>
                 </div>
                 
-                <div className="input-group textarea-group">
+                <div className={`input-group textarea-group has-demo ${formState.message ? 'has-value' : ''}`}>
                     <textarea 
                       id="message" 
                       rows="4" 
@@ -214,6 +230,11 @@ export default function ContactSection() {
                       disabled={status === 'sending'}
                     ></textarea>
                     <label htmlFor="message">¿En qué puedo ayudarte?</label>
+                    <span className="demo-placeholder" aria-hidden="true">
+                      <span className="demo-placeholder-text" key={`message-${sampleIndex}`}>
+                        {currentDemo.message}
+                      </span>
+                    </span>
                     <div className="focus-border"></div>
                 </div>
 
