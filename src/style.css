@@ -2146,6 +2146,12 @@ img {
   will-change: opacity, transform;
 }
 
+/* Strong override when JS flags element as permanently visible (prevents GSAP/inline flicker) */
+.fade-in[data-fadein-visible="true"] {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
 .stagger-children .fade-in:nth-child(1) {
   transition-delay: 0.05s
 }

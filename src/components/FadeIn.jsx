@@ -46,6 +46,10 @@ export default function FadeIn({ children, as: Tag = 'div', delay = 0, className
       const r = el.getBoundingClientRect();
       if (r.top < window.innerHeight * 0.9) {
         el.classList.add('visible');
+        // Mark with attribute so CSS can target with !important
+        el.setAttribute('data-fadein-visible', 'true');
+        // If GSAP is present, stop tweens on this element to avoid conflicts
+        try { if (window.gsap && typeof window.gsap.killTweensOf === 'function') window.gsap.killTweensOf(el); } catch (e) {}
         try { observer.unobserve(el); } catch (e) {}
         if (rafId) cancelAnimationFrame(rafId);
         rafId = null;
@@ -60,6 +64,8 @@ export default function FadeIn({ children, as: Tag = 'div', delay = 0, className
       const r = el.getBoundingClientRect();
       if (r.top < window.innerHeight * 0.9) {
         el.classList.add('visible');
+        el.setAttribute('data-fadein-visible', 'true');
+        try { if (window.gsap && typeof window.gsap.killTweensOf === 'function') window.gsap.killTweensOf(el); } catch (e) {}
         try { observer.unobserve(el); } catch (e) {}
       }
     };
