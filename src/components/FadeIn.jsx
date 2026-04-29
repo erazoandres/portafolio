@@ -12,27 +12,53 @@ export default function FadeIn({ children, as: Tag = 'div', delay = 0, className
     const el = ref.current;
     if (!el) return;
 
-    // Use IntersectionObserver with a slightly negative bottom rootMargin
-    // so elements trigger a bit earlier as the user scrolls down.
-    // Fallback: if IntersectionObserver is not available, reveal immediately.
-    if (!('IntersectionObserver' in window)) {
+    // Check if already in viewport
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight) {
       el.classList.add('visible');
       return;
     }
 
-    const obsOptions = { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.05 };
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          obs.unobserve(entry.target);
-        }
-      });
-    }, obsOptions);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px', threshold: 0.1 }
+    );
 
     observer.observe(el);
 
-    return () => observer.disconnect();
+    // Fallback for smooth-scroll libraries (e.g., Lenis) or environments
+    // where IntersectionObserver may not fire reliably. Use a lightweight
+    // requestAnimationFrame loop to check visibility until element becomes visible.
+    let rafId = null;
+    const checkVisibility = () => {
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.9) {
+        el.classList.add('visible');
+        try { observer.unobserve(el); } catch (e) {}
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = null;
+        return;
+      }
+      rafId = requestAnimationFrame(checkVisibility);
+    };
+
+    // Start fallback check (only if element not already visible)
+    if (!el.classList.contains('visible')) {
+      rafId = requestAnimationFrame(checkVisibility);
+    }
+
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      observer.disconnect();
+    };
   }, []);
 
   const style = delay > 0 ? { transitionDelay: `${delay}s` } : undefined;
