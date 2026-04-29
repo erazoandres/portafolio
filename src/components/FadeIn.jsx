@@ -35,10 +35,14 @@ export default function FadeIn({ children, as: Tag = 'div', delay = 0, className
 
     // Fallback for smooth-scroll libraries (e.g., Lenis) or environments
     // where IntersectionObserver may not fire reliably. Use a lightweight
-    // requestAnimationFrame loop to check visibility until element becomes visible.
+    // requestAnimationFrame loop + scroll listener to check visibility until
+    // the element becomes visible or a short timeout elapses.
     let rafId = null;
+    let timeoutId = null;
+    let stopped = false;
+
     const checkVisibility = () => {
-      if (!el) return;
+      if (stopped || !el) return;
       const r = el.getBoundingClientRect();
       if (r.top < window.innerHeight * 0.9) {
         el.classList.add('visible');
@@ -50,13 +54,33 @@ export default function FadeIn({ children, as: Tag = 'div', delay = 0, className
       rafId = requestAnimationFrame(checkVisibility);
     };
 
-    // Start fallback check (only if element not already visible)
+    const onScroll = () => {
+      // run a single quick visibility check on scroll (helps Lenis-like setups)
+      if (stopped || !el) return;
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.9) {
+        el.classList.add('visible');
+        try { observer.unobserve(el); } catch (e) {}
+      }
+    };
+
+    // Start fallback checks only if element not already visible
     if (!el.classList.contains('visible')) {
       rafId = requestAnimationFrame(checkVisibility);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      // safety: stop trying after 2500ms to avoid infinite loops
+      timeoutId = setTimeout(() => {
+        stopped = true;
+        if (rafId) cancelAnimationFrame(rafId);
+        window.removeEventListener('scroll', onScroll);
+      }, 2500);
     }
 
     return () => {
+      stopped = true;
       if (rafId) cancelAnimationFrame(rafId);
+      if (timeoutId) clearTimeout(timeoutId);
+      try { window.removeEventListener('scroll', onScroll); } catch (e) {}
       observer.disconnect();
     };
   }, []);
