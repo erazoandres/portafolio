@@ -129,7 +129,7 @@ export const heroLinesData = [
   { type: 'cmd', text: '¿quien soy?' },
   { type: 'output', text: 'Andrés Erazo — Senior Frontend Engineer' },
   { type: 'cmd', text: '¿qué ofrezco?' },
-    { type: 'output-secondary', text: 'Web Apps · AI Agents · n8n Automation · APIs · Consultancy · Apps Android · Web Sites' },
+    { type: 'output-secondary', text: 'Web Apps · Android Apps · AI Agents · n8n Automation · APIs · Consultancy · Websites' },
   { type: 'cmd', text: 'echo $STATUS' },
   { type: 'output', text: 'Disponible solo para proyectos ambiciosos y muy cool 😎' },
 ];
