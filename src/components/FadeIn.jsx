@@ -12,24 +12,23 @@ export default function FadeIn({ children, as: Tag = 'div', delay = 0, className
     const el = ref.current;
     if (!el) return;
 
-    // Check if already in viewport
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight) {
+    // Use IntersectionObserver with a slightly negative bottom rootMargin
+    // so elements trigger a bit earlier as the user scrolls down.
+    // Fallback: if IntersectionObserver is not available, reveal immediately.
+    if (!('IntersectionObserver' in window)) {
       el.classList.add('visible');
       return;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { rootMargin: '0px', threshold: 0.1 }
-    );
+    const obsOptions = { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.05 };
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, obsOptions);
 
     observer.observe(el);
 

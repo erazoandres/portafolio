@@ -1,7 +1,28 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useMagnetic } from '../hooks/useMagnetic';
+
+const demoScenarios = [
+  {
+    request: 'Necesito una landing rapida para validar una idea SaaS.',
+    name: 'Camila Rojas',
+    email: 'camila@marca.co',
+    message: 'Necesito una web elegante para captar clientes y medir conversiones.',
+  },
+  {
+    request: 'Quiero automatizar reportes y conectar mis herramientas.',
+    name: 'Diego Alvarez',
+    email: 'diego@operaciones.io',
+    message: 'Quiero automatizar reportes semanales y conectar mis herramientas.',
+  },
+  {
+    request: 'Busco renovar mi portfolio con una experiencia mas premium.',
+    name: 'Valentina Cruz',
+    email: 'valentina@edtech.com',
+    message: 'Busco una app educativa con dashboard y flujo de usuarios.',
+  },
+];
 
 /**
  * Premium Contact Section — Redesigned with advanced interactions, 
@@ -10,6 +31,7 @@ import { useMagnetic } from '../hooks/useMagnetic';
 export default function ContactSection() {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('idle'); // idle | sending | success
+  const [sampleIndex, setSampleIndex] = useState(0);
   
   const containerRef = useRef(null);
   
@@ -17,9 +39,17 @@ export default function ContactSection() {
   const githubRef = useMagnetic({ strength: 30 });
   const linkedinRef = useMagnetic({ strength: 30 });
   const submitBtnRef = useMagnetic({ strength: 40 });
+  const currentDemo = demoScenarios[sampleIndex] || demoScenarios[0];
 
   const handleChange = (e) => {
     setFormState({ ...formState, [e.target.id]: e.target.value });
+  };
+
+  const useSampleRequest = () => {
+    setFormState((current) => ({
+      ...current,
+      message: currentDemo.request,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -58,6 +88,14 @@ export default function ContactSection() {
 
   }, { scope: containerRef });
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSampleIndex((current) => (current + 1) % demoScenarios.length);
+    }, 3600);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section id="contact" className="section premium-contact-section" ref={containerRef}>
       <div className="contact-ambient-glow"></div>
@@ -80,20 +118,15 @@ export default function ContactSection() {
               Toda gran idea comienza con una conversación. Cuéntame qué tienes en mente y hagámoslo realidad juntos.
             </p>
 
+            {/* request-simulator removed per user request */}
+
             <div className="response-time">
               <i className="far fa-clock"></i>
               <span>Respuesta garantizada en menos de 24h</span>
             </div>
 
-           <div className="contact-methods">
-              <a href="mailto:erazoandres14@gmail.com" className="method-card group">
-                 <div className="method-icon"><i className="fas fa-envelope"></i></div>
-                 <div className="method-text">
-                   <span className="method-label">Email</span>
-                   <span className="method-value">erazoandres14@gmail.com</span>
-                 </div>
-                 <div className="card-arrow"><i className="fas fa-arrow-right"></i></div>
-              </a>
+            <div className="contact-methods">
+              {/* email method removed per request */}
 
               <div className="social-methods">
                 <a 
@@ -141,7 +174,7 @@ export default function ContactSection() {
                 <h3 className="form-title">Proyectar ahora</h3>
                 
                 <div className="input-row">
-                    <div className="input-group">
+                    <div className={`input-group has-demo ${formState.name ? 'has-value' : ''}`}>
                         <input 
                           type="text" 
                           id="name" 
@@ -152,9 +185,14 @@ export default function ContactSection() {
                           disabled={status === 'sending'}
                         />
                         <label htmlFor="name">Nombre</label>
+                        <span className="demo-placeholder" aria-hidden="true">
+                          <span className="demo-placeholder-text" key={`name-${sampleIndex}`}>
+                            {currentDemo.name}
+                          </span>
+                        </span>
                         <div className="focus-border"></div>
                     </div>
-                    <div className="input-group">
+                    <div className={`input-group has-demo ${formState.email ? 'has-value' : ''}`}>
                         <input 
                           type="email" 
                           id="email" 
@@ -165,11 +203,16 @@ export default function ContactSection() {
                           disabled={status === 'sending'}
                         />
                         <label htmlFor="email">Email</label>
+                        <span className="demo-placeholder" aria-hidden="true">
+                          <span className="demo-placeholder-text" key={`email-${sampleIndex}`}>
+                            {currentDemo.email}
+                          </span>
+                        </span>
                         <div className="focus-border"></div>
                     </div>
                 </div>
                 
-                <div className="input-group textarea-group">
+                <div className={`input-group textarea-group has-demo ${formState.message ? 'has-value' : ''}`}>
                     <textarea 
                       id="message" 
                       rows="4" 
@@ -180,6 +223,11 @@ export default function ContactSection() {
                       disabled={status === 'sending'}
                     ></textarea>
                     <label htmlFor="message">¿En qué puedo ayudarte?</label>
+                    <span className="demo-placeholder" aria-hidden="true">
+                      <span className="demo-placeholder-text" key={`message-${sampleIndex}`}>
+                        {currentDemo.message}
+                      </span>
+                    </span>
                     <div className="focus-border"></div>
                 </div>
 
