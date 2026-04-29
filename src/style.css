@@ -2141,8 +2141,9 @@ img {
 }
 
 .fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  will-change: opacity, transform;
 }
 
 .stagger-children .fade-in:nth-child(1) {
