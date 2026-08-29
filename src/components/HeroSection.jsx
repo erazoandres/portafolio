@@ -14,11 +14,19 @@ export default function HeroSection({ onNavigate }) {
   const [visibleLines, setVisibleLines] = useState([]);
   const [displayedRole, setDisplayedRole] = useState('');
   const [glitchedName, setGlitchedName] = useState(NAME_TEXT);
+  const [isFlipped, setIsFlipped] = useState(false);
   const ROLE_TEXT = 'Senior Frontend Engineer';
   const GLITCH_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*';
   const containerRef = useRef(null);
 
-
+  const toggleFlip = () => {
+    const flipper = containerRef.current?.querySelector('.terminal-card-flipper');
+    if (!flipper) return;
+    const currentRotate = gsap.getProperty(flipper, 'rotateY') || (isFlipped ? 180 : 0);
+    const nextRotate = currentRotate >= 90 ? 0 : 180;
+    gsap.to(flipper, { rotateY: nextRotate, duration: 1.1, ease: 'power3.inOut' });
+    setIsFlipped(nextRotate >= 90);
+  };
 
   useGSAP(() => {
     // Initial reveal animations
@@ -63,7 +71,15 @@ export default function HeroSection({ onNavigate }) {
         ease: 'power2.out' 
       }, '-=0.6');
 
-    // Terminal typing logic with GSAP (more precise than setTimeouts)
+    // Automatic 3D Card Flip from photo to terminal shell
+    tl.to('.terminal-card-flipper', {
+      rotateY: 180,
+      duration: 1.2,
+      ease: 'power3.inOut',
+      onComplete: () => setIsFlipped(true),
+    }, 1.2);
+
+    // Terminal typing logic with GSAP (triggers right as flip finishes)
     let lineIndex = 0;
     const typeNextLine = () => {
       if (lineIndex >= heroLinesData.length) return;
@@ -95,7 +111,7 @@ export default function HeroSection({ onNavigate }) {
       });
     };
 
-    gsap.delayedCall(1.2, typeNextLine);
+    gsap.delayedCall(2.2, typeNextLine);
 
   }, { scope: containerRef });
 
@@ -130,17 +146,34 @@ export default function HeroSection({ onNavigate }) {
         </div>
 
         <div className="hero-terminal-wrapper">
-          <TerminalCard filename="erazo@portfolio ~ shell" className="hero-terminal">
-            {visibleLines.map((line, idx) => (
-              <div key={idx} className={`line ${line.type}`}>
-                {line.type === 'cmd' && <span className="prompt">❯ </span>}
-                <span className={line.type}>{line.text}</span>
-                {idx === visibleLines.length - 1 && line.type === 'cmd' && (
-                  <span className="cursor-blink">▊</span>
-                )}
-              </div>
-            ))}
-          </TerminalCard>
+          <div className={`terminal-card-flipper ${isFlipped ? 'is-flipped' : ''}`}>
+            {/* Front Face: Andrés' Photo */}
+            <div className="terminal-face terminal-face-photo">
+              <TerminalCard filename="erazo@portfolio ~ avatar.jpg" className="hero-terminal photo-terminal" onFlip={toggleFlip}>
+                <div className="hero-photo-container">
+                  <img src="/assets/hero-photo.jpg" alt="Andrés Erazo" className="hero-photo-img" />
+                  <div className="hero-photo-badge">
+                    <span className="status-dot"></span> Andrés Erazo @ Javeriana
+                  </div>
+                </div>
+              </TerminalCard>
+            </div>
+
+            {/* Back Face: Terminal Shell */}
+            <div className="terminal-face terminal-face-shell">
+              <TerminalCard filename="erazo@portfolio ~ shell" className="hero-terminal" onFlip={toggleFlip}>
+                {visibleLines.map((line, idx) => (
+                  <div key={idx} className={`line ${line.type}`}>
+                    {line.type === 'cmd' && <span className="prompt">❯ </span>}
+                    <span className={line.type}>{line.text}</span>
+                    {idx === visibleLines.length - 1 && line.type === 'cmd' && (
+                      <span className="cursor-blink">▊</span>
+                    )}
+                  </div>
+                ))}
+              </TerminalCard>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -615,6 +615,123 @@ img {
   width: 100%;
 }
 
+@media (min-width: 992px) {
+  .hero-layout {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3rem;
+  }
+}
+
+/* ─── HERO 3D TERMINAL CARD FLIP ─── */
+.hero-terminal-wrapper {
+  perspective: 1200px;
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.terminal-card-flipper {
+  position: relative;
+  width: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.terminal-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  width: 100%;
+  transform-style: preserve-3d;
+}
+
+.terminal-face-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.terminal-face-photo .term-card {
+  height: 100%;
+}
+
+.terminal-face-shell {
+  transform: rotateY(180deg);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-photo-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.hero-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: contrast(1.05) brightness(0.95);
+  transition: transform 0.6s ease;
+}
+
+.photo-terminal:hover .hero-photo-img {
+  transform: scale(1.03);
+}
+
+.hero-photo-badge {
+  position: absolute;
+  bottom: 0.85rem;
+  left: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(10, 10, 15, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+}
+
+.terminal-flip-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.7rem;
+  z-index: 15;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-secondary);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.terminal-flip-btn:hover {
+  color: var(--accent);
+  background: rgba(245, 158, 11, 0.18);
+  border-color: var(--accent);
+  transform: rotate(180deg);
+}
+
 .hero-intro {
   display: flex;
   flex-direction: column;
