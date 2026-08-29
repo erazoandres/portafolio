@@ -101,11 +101,6 @@ export default function ProjectsSection() {
                       Ver Proyecto Live
                     </a>
                   )}
-                  {project.github && (
-                    <a href={project.github} target="_blank" rel="noreferrer" className="btn btn-ghost">
-                      GitHub
-                    </a>
-                  )}
                 </div>
 
                 {hasLongDescription && (
