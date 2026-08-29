@@ -30,7 +30,7 @@ export const projectsData = [
     title: 'SpritesLocker',
     file: 'sprites-locker/',
     image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop',
-    link: null,
+    link: 'https://spriteslocker.vercel.app/',
     github: 'https://github.com/erazoandres/SpritesLocker',
     desc: 'Sistema de gestión y almacenamiento de sprites y recursos gráficos para videojuegos.',
     tags: ['JavaScript', 'GameDev', 'Storage'],
