@@ -9,6 +9,33 @@ export const sectionsNav = [
 
 export const projectsData = [
   {
+    title: 'SpriteCreator',
+    file: 'sprite-creator/',
+    image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop',
+    link: 'https://erazoandres.github.io/SpriteCreator/',
+    github: 'https://github.com/erazoandres/SpriteCreator',
+    desc: 'Una web app interactiva para crear y personalizar personajes 2D para tus videojuegos.',
+    tags: ['JavaScript', 'Canvas', 'GameDev'],
+  },
+  {
+    title: 'ListCheckTutor',
+    file: 'list-check-tutor/',
+    image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1000&auto=format&fit=crop',
+    link: 'https://erazoandres.github.io/ListCheckTutor/',
+    github: 'https://github.com/erazoandres/ListCheckTutor',
+    desc: 'Una lista interactiva para ayudarte a cumplir tus objetivos de calidad y verificación en clases.',
+    tags: ['JavaScript', 'HTML5', 'EdTech'],
+  },
+  {
+    title: 'SpritesLocker',
+    file: 'sprites-locker/',
+    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop',
+    link: null,
+    github: 'https://github.com/erazoandres/SpritesLocker',
+    desc: 'Sistema de gestión y almacenamiento de sprites y recursos gráficos para videojuegos.',
+    tags: ['JavaScript', 'GameDev', 'Storage'],
+  },
+  {
     title: 'Audit Studio',
     file: 'audit-studio/',
     image: '/assets/nexus.webp',
