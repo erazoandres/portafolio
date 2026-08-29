@@ -150,7 +150,7 @@ img {
 
 /* ─── SECTIONS ─── */
 .section {
-  padding: clamp(2rem, 4vh, 3.5rem) 0;
+  padding: clamp(3rem, 8vh, 6rem) 0;
   position: relative;
 }
 
@@ -164,8 +164,8 @@ img {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--accent);
-  margin-bottom: 0.5rem;
-  padding: 0.3rem 0.75rem;
+  margin-bottom: 0.75rem;
+  padding: 0.35rem 0.85rem;
   background: rgba(245, 158, 11, 0.08);
   border: 1px solid rgba(245, 158, 11, 0.15);
   border-radius: 999px;
@@ -184,12 +184,12 @@ img {
 }
 
 .section-heading {
-  font-size: clamp(2.2rem, 6vw, 3.8rem);
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
   font-weight: 700;
   letter-spacing: -0.05em;
   /* Slightly increased line-height to avoid descender clipping */
   line-height: 1.05;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   /* Fallback color to ensure visibility on all browsers */
   color: #ffffff;
   background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.7) 100%);
@@ -201,11 +201,11 @@ img {
 }
 
 .section-desc {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--text-secondary);
   max-width: 560px;
-  line-height: 1.55;
-  margin-bottom: 1rem;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
 }
 
 /* ─── PREMIUM TERMINAL CARDS ─── */
@@ -379,10 +379,10 @@ img {
 /* ─── SERVICES GRID ─── */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: clamp(0.65rem, 1.2vw, 0.85rem);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(0.85rem, 1.5vw, 1.1rem);
   align-items: stretch;
-  margin-top: 0.5rem;
+  margin-top: 1.75rem;
 }
 
 .service-card {
@@ -391,7 +391,7 @@ img {
 }
 
 .service-card .term-body {
-  padding: 0.65rem 0.85rem 0.75rem 0.85rem;
+  padding: 0.85rem 1rem 1rem 1rem;
 }
 
 .service-card .service-card-inner {
@@ -403,34 +403,34 @@ img {
 .service-card-header {
   display: flex;
   align-items: center;
-  gap: 0.55rem;
-  margin-bottom: 0.25rem;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
 }
 
 .service-icon-circle {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   color: #fff;
   background: linear-gradient(135deg, var(--accent-secondary), var(--accent));
-  box-shadow: 0 3px 10px rgba(168, 85, 247, 0.15);
+  box-shadow: 0 4px 14px rgba(168, 85, 247, 0.15);
   flex-shrink: 0;
 }
 
 .service-title-group h3 {
   margin: 0;
-  font-size: 0.92rem;
+  font-size: 1rem;
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 .service-tagline {
   display: block;
-  font-size: 0.72rem;
+  font-size: 0.76rem;
   color: var(--text-secondary);
   font-weight: 500;
 }
@@ -441,35 +441,35 @@ img {
 }
 
 .service-card:hover {
-  transform: translateY(-4px) translateZ(0);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.5), 0 0 20px rgba(168,85,247,0.06);
+  transform: translateY(-6px) translateZ(0);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 28px rgba(168,85,247,0.06);
   border-color: rgba(168,85,247,0.15);
 }
 
 .service-desc {
   color: var(--text-secondary);
-  font-size: 0.78rem;
-  line-height: 1.38;
-  margin: 0.15rem 0 0.45rem 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  margin: 0.2rem 0 0.65rem 0;
 }
 
 .service-features {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem;
-  margin: 0 0 0.3rem 0;
+  gap: 0.35rem;
+  margin: 0 0 0.85rem 0;
   padding: 0;
 }
 
 .service-features li {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.3rem;
   color: var(--text-secondary);
-  font-size: 0.66rem;
-  line-height: 1.15;
-  padding: 0.15rem 0.42rem;
+  font-size: 0.7rem;
+  line-height: 1.2;
+  padding: 0.2rem 0.5rem;
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.03);
@@ -477,23 +477,23 @@ img {
 
 .service-features .feature-dot {
   color: var(--accent);
-  font-size: 0.6rem;
+  font-size: 0.65rem;
 }
 
 .service-actions {
-  margin-top: 0.35rem;
+  margin-top: auto;
   display: flex;
-  gap: 0.4rem;
-  padding-top: 0;
+  gap: 0.5rem;
+  padding-top: 0.4rem;
 }
 
 .service-actions .btn {
-  min-height: 28px;
-  padding: 0.3rem 0.7rem;
-  font-size: 0.68rem;
+  min-height: 32px;
+  padding: 0.38rem 0.8rem;
+  font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 @media (max-width: 720px) {
@@ -1812,10 +1812,10 @@ img {
 /* ─── PROJECTS EDITORIAL SHOWCASE ─── */
 .projects-showcase {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   grid-auto-rows: minmax(0, 1fr);
-  gap: clamp(1.25rem, 3vw, 2rem);
-  margin-top: 3rem;
+  gap: clamp(1rem, 2vw, 1.4rem);
+  margin-top: 2rem;
 }
 
 .project-item {
@@ -1834,7 +1834,7 @@ img {
 }
 
 .project-item:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
   border-color: var(--accent-dim);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(245, 158, 11, 0.05);
 }
@@ -1871,31 +1871,28 @@ img {
 .project-content {
   display: flex;
   flex-direction: column;
-  gap: 0.72rem;
-  padding: clamp(1rem, 2.5vw, 1.2rem);
+  gap: 0.5rem;
+  padding: 0.85rem 1rem 1rem 1rem;
   flex-grow: 1;
-  height: 286px;
   position: relative;
 }
 
 .project-content h3 {
-  font-size: clamp(1.16rem, 2.4vw, 1.42rem);
+  font-size: 1.12rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--text-primary);
-  line-height: 1.15;
-  min-height: 1.65em;
-  display: flex;
-  align-items: flex-end;
+  line-height: 1.25;
+  margin: 0;
 }
 
 .project-desc {
-  font-size: 0.9rem;
+  font-size: 0.83rem;
   color: var(--text-secondary);
-  line-height: 1.5;
-  min-height: 4.05rem;
+  line-height: 1.45;
+  margin: 0.1rem 0 0.25rem 0;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -1903,14 +1900,14 @@ img {
 .project-read-more {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
   align-self: flex-start;
-  min-height: 32px;
+  min-height: 28px;
   border: 0;
   background: transparent;
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -1994,14 +1991,14 @@ img {
 .project-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
-  min-height: 1.75rem;
+  gap: 0.35rem;
+  margin-bottom: 0.35rem;
 }
 
 .project-tag {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  padding: 0.4rem 0.8rem;
+  font-size: 0.7rem;
+  padding: 0.22rem 0.6rem;
   background: var(--accent-dim);
   color: var(--accent);
   border-radius: 999px;
@@ -2010,16 +2007,16 @@ img {
 
 .project-actions {
   display: flex;
-  gap: 0.65rem;
+  gap: 0.5rem;
   margin-top: auto;
-  min-height: 40px;
-  align-items: flex-end;
+  padding-top: 0.25rem;
+  align-items: center;
 }
 
 .project-actions .btn {
-  min-height: 40px;
-  padding: 0.62rem 0.9rem;
-  font-size: 0.68rem;
+  min-height: 32px;
+  padding: 0.38rem 0.8rem;
+  font-size: 0.72rem;
   white-space: nowrap;
 }
 
