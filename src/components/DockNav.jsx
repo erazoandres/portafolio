@@ -32,16 +32,6 @@ export default function DockNav({ currentSection, onNavigate }) {
         <i className="fab fa-github"></i>
         <span className="dock-tooltip">GitHub</span>
       </a>
-      <a
-        href="https://www.linkedin.com/in/erazoandres1408/"
-        target="_blank"
-        rel="noreferrer"
-        className="dock-item"
-        aria-label="LinkedIn"
-      >
-        <i className="fab fa-linkedin"></i>
-        <span className="dock-tooltip">LinkedIn</span>
-      </a>
     </nav>
   );
 }
