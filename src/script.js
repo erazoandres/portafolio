@@ -51,16 +51,21 @@ export const initSmoothScroll = () => {
  * @param {string|number|HTMLElement} target - Target to scroll to.
  */
 export const scrollToTarget = (target) => {
-  if (lenis) {
-    lenis.scrollTo(target, {
-      duration: 1.5,
+  const el = typeof target === 'string' ? document.querySelector(target) : target;
+  if (!el && typeof target !== 'number') return;
+
+  if (lenis && typeof lenis.scrollTo === 'function') {
+    lenis.scrollTo(el || target, {
+      offset: 0,
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
   } else {
-    // Fallback if lenis is not initialized
-    const el = typeof target === 'string' ? document.querySelector(target) : target;
-    if (el && el.scrollIntoView) {
-      el.scrollIntoView({ behavior: 'smooth' });
+    const targetEl = el || (typeof target === 'string' ? document.querySelector(target) : null);
+    if (targetEl && targetEl.scrollIntoView) {
+      targetEl.scrollIntoView({ behavior: 'smooth' });
+    } else if (typeof target === 'number') {
+      window.scrollTo({ top: target, behavior: 'smooth' });
     }
   }
 };
