@@ -204,6 +204,134 @@ export const initFloatingPhysics = (selector = '.float-element') => {
 };
 
 /**
+ * Enables smooth mouse click-and-drag page scrolling with inertia momentum.
+ * Excludes interactive elements (buttons, links, inputs, cards) from triggering drag.
+ */
+export const initMouseDragScroll = () => {
+  let isMouseDown = false;
+  let startY = 0;
+  let startScrollTop = 0;
+  let velocityY = 0;
+  let lastY = 0;
+  let lastTime = 0;
+  let animationFrameId = null;
+  let isDragging = false;
+
+  const isInteractiveElement = (target) => {
+    if (!target) return false;
+    return !!target.closest(
+      'a, button, input, textarea, select, label, option, .btn, .custom-cursor, .dock-nav, .term-card, [role="button"], [contenteditable="true"]'
+    );
+  };
+
+  const onMouseDown = (e) => {
+    // Only primary mouse button (left click)
+    if (e.button !== 0) return;
+    if (isInteractiveElement(e.target)) return;
+
+    isMouseDown = true;
+    isDragging = false;
+    startY = e.clientY;
+    lastY = e.clientY;
+    lastTime = performance.now();
+    startScrollTop = window.scrollY || document.documentElement.scrollTop;
+    velocityY = 0;
+
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+    }
+  };
+
+  const onMouseMove = (e) => {
+    if (!isMouseDown) return;
+
+    const currentY = e.clientY;
+    const deltaY = startY - currentY;
+
+    if (!isDragging && Math.abs(deltaY) > 4) {
+      isDragging = true;
+      document.body.classList.add('is-dragging-scroll');
+    }
+
+    if (isDragging) {
+      const now = performance.now();
+      const dt = Math.max(now - lastTime, 1);
+      const dy = currentY - lastY;
+
+      velocityY = (dy / dt) * 16;
+      lastY = currentY;
+      lastTime = now;
+
+      const targetY = startScrollTop + deltaY;
+
+      if (lenis && typeof lenis.scrollTo === 'function') {
+        lenis.scrollTo(targetY, { immediate: true });
+      } else {
+        window.scrollTo(0, targetY);
+      }
+    }
+  };
+
+  const applyInertia = () => {
+    if (Math.abs(velocityY) > 0.5) {
+      const step = velocityY;
+      velocityY *= 0.90;
+
+      if (lenis && typeof lenis.scrollTo === 'function') {
+        lenis.scrollTo(window.scrollY - step * 10, {
+          duration: 0.6,
+          easing: (t) => 1 - Math.pow(1 - t, 3),
+        });
+        velocityY = 0;
+      } else {
+        window.scrollBy(0, -step);
+        animationFrameId = requestAnimationFrame(applyInertia);
+      }
+    } else {
+      velocityY = 0;
+      animationFrameId = null;
+    }
+  };
+
+  const onMouseUp = () => {
+    if (!isMouseDown) return;
+
+    isMouseDown = false;
+    document.body.classList.remove('is-dragging-scroll');
+
+    if (isDragging) {
+      if (Math.abs(velocityY) > 0.5) {
+        applyInertia();
+      }
+
+      const preventClickOnce = (clickEvent) => {
+        clickEvent.stopPropagation();
+        clickEvent.preventDefault();
+        window.removeEventListener('click', preventClickOnce, true);
+      };
+      window.addEventListener('click', preventClickOnce, true);
+      setTimeout(() => {
+        window.removeEventListener('click', preventClickOnce, true);
+      }, 50);
+    }
+  };
+
+  window.addEventListener('mousedown', onMouseDown, { passive: true });
+  window.addEventListener('mousemove', onMouseMove, { passive: true });
+  window.addEventListener('mouseup', onMouseUp, { passive: true });
+  window.addEventListener('mouseleave', onMouseUp, { passive: true });
+
+  return () => {
+    window.removeEventListener('mousedown', onMouseDown);
+    window.removeEventListener('mousemove', onMouseMove);
+    window.removeEventListener('mouseup', onMouseUp);
+    window.removeEventListener('mouseleave', onMouseUp);
+    if (animationFrameId) cancelAnimationFrame(animationFrameId);
+  };
+};
+
+/**
  * Applies parallax effect to background or specific elements
  */
 export const initParallax = (selector = '.parallax') => {

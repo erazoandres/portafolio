@@ -2769,3 +2769,15 @@ img {
   will-change: transform, opacity;
 }
 
+/* ─── MOUSE DRAG SCROLL STYLES ─── */
+body.is-dragging-scroll {
+  cursor: grabbing !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+
+body.is-dragging-scroll * {
+  cursor: grabbing !important;
+  user-select: none !important;
+}
+

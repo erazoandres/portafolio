@@ -16,6 +16,7 @@ import {
   destroySmoothScroll,
   animateText,
   initFloatingPhysics,
+  initMouseDragScroll,
   scrollToTarget
 } from './script';
 import gsap from 'gsap';
@@ -36,6 +37,9 @@ export default function App() {
   useEffect(() => {
     // Initialize Lenis & GSAP ScrollSmoother logic
     initSmoothScroll();
+
+    // Enable click-and-drag mouse page scrolling
+    const cleanupDragScroll = initMouseDragScroll();
 
     // Custom Cursor Logic with quickSetter for high-performance tracking
     const cursor = document.querySelector('.custom-cursor');
@@ -103,6 +107,7 @@ export default function App() {
     return () => {
       window.removeEventListener('mousemove', moveCursor);
       gsap.ticker.remove(updateFrame);
+      if (cleanupDragScroll) cleanupDragScroll();
       destroySmoothScroll();
     };
   }, []);
