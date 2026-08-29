@@ -2008,8 +2008,8 @@ img {
 .project-actions {
   display: flex;
   gap: 0.5rem;
-  margin-top: auto;
-  padding-top: 0.25rem;
+  margin-top: 0.35rem;
+  padding-top: 0;
   align-items: center;
 }
 
