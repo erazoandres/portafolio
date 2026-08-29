@@ -22,29 +22,31 @@ export default function ServicesSection() {
           <FadeIn key={svc.title}>
             <TerminalCard filename={svc.file} className="service-card">
               <div className="service-card-inner">
-                <div className="service-icon-circle" aria-hidden="true">
-                  <i className={svc.icon}></i>
+                <div className="service-card-header">
+                  <div className="service-icon-circle" aria-hidden="true">
+                    <i className={svc.icon}></i>
+                  </div>
+                  <div className="service-title-group">
+                    <h3>{svc.title}</h3>
+                    <span className="service-tagline">{svc.tagline}</span>
+                  </div>
                 </div>
 
-                <div className="service-body">
-                  <h3>{svc.title}</h3>
-                  <p className="service-tagline">{svc.tagline}</p>
-                  <p className="service-desc">{svc.desc}</p>
+                <p className="service-desc">{svc.desc}</p>
 
-                  {svc.features && (
-                    <ul className="service-features" aria-hidden>
-                      {svc.features.map((f, i) => (
-                        <li key={i}><i className="fas fa-check-circle feature-dot"></i> {f}</li>
-                      ))}
-                    </ul>
+                {svc.features && (
+                  <ul className="service-features" aria-hidden>
+                    {svc.features.map((f, i) => (
+                      <li key={i}><i className="fas fa-check-circle feature-dot"></i> {f}</li>
+                    ))}
+                  </ul>
+                )}
+
+                <div className="service-actions">
+                  <a href="#contact" className="btn btn-primary">{svc.cta}</a>
+                  {svc.projectsLink && (
+                    <a href={svc.projectsLink} target="_blank" rel="noreferrer" className="btn btn-ghost">Ver proyectos</a>
                   )}
-
-                  <div className="service-actions">
-                    <a href="#contact" className="btn btn-primary">{svc.cta}</a>
-                    {svc.projectsLink && (
-                      <a href={svc.projectsLink} target="_blank" rel="noreferrer" className="btn btn-ghost">Ver proyectos</a>
-                    )}
-                  </div>
                 </div>
               </div>
             </TerminalCard>
