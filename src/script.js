@@ -90,6 +90,8 @@ export const destroySmoothScroll = () => {
  */
 export const animateText = (selector = '.split-text') => {
   const elements = document.querySelectorAll(selector);
+  if (!elements.length) return;
+
   let mm = gsap.matchMedia();
 
   mm.add({
@@ -99,21 +101,35 @@ export const animateText = (selector = '.split-text') => {
     let { isDesktop } = context.conditions;
 
     elements.forEach((el) => {
+      // Revert previous SplitType instance if it exists to avoid nested splitting
+      if (el._splitInstance) {
+        try {
+          el._splitInstance.revert();
+        } catch (e) {
+          // ignore
+        }
+        el._splitInstance = null;
+      }
+
       if (isDesktop) {
-        const split = new SplitType(el, { types: 'chars, words' });
-        gsap.from(split.chars, {
-          opacity: 0,
-          y: 20,
-          rotateX: -90,
-          stagger: 0.02,
-          duration: 0.8,
-          ease: 'back.out(1.7)',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse',
-          },
-        });
+        // Create SplitType using inline span tags for clean typography flow
+        const split = new SplitType(el, { types: 'chars, words', tagName: 'span' });
+        el._splitInstance = split;
+
+        if (split.chars && split.chars.length > 0) {
+          gsap.from(split.chars, {
+            opacity: 0,
+            y: 20,
+            stagger: 0.02,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 85%',
+              toggleActions: 'play none none reverse',
+            },
+          });
+        }
       } else {
         // Mobile: Simpler fade-up without splitting to avoid DOM overload and layout lag
         gsap.from(el, {
@@ -129,6 +145,17 @@ export const animateText = (selector = '.split-text') => {
         });
       }
     });
+
+    return () => {
+      elements.forEach((el) => {
+        if (el._splitInstance) {
+          try {
+            el._splitInstance.revert();
+          } catch (e) {}
+          el._splitInstance = null;
+        }
+      });
+    };
   });
 };
 

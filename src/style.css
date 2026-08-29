@@ -2778,3 +2778,16 @@ img {
   width: 20px;
 }
 
+/* ─── SPLIT-TYPE / TEXT ANIMATION STYLES ─── */
+.word {
+  display: inline-block;
+  white-space: nowrap;
+  vertical-align: top;
+}
+
+.char {
+  display: inline-block;
+  position: relative;
+  will-change: transform, opacity;
+}
+

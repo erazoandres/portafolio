@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { projectsData } from '../data';
+import FadeIn from './FadeIn';
 
 /**
  * Projects section — compact grid of project cards with hover interactions.
@@ -59,8 +60,8 @@ export default function ProjectsSection() {
 
   return (
     <section id="projects" className="section" ref={containerRef}>
-      <span className="section-label">Proyectos Realizados</span>
-      <h2 className="section-heading">Showcase de trabajos</h2>
+      <FadeIn as="span" className="section-label">Proyectos Realizados</FadeIn>
+      <FadeIn as="h2" className="section-heading">Showcase de trabajos</FadeIn>
 
       <div className="projects-showcase">
         {projectsData.map((project) => {

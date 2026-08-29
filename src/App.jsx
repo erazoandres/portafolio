@@ -80,9 +80,8 @@ export default function App() {
 
     window.addEventListener('mousemove', moveCursor, { passive: true });
 
-    // Initialize text and physics animations after initial render
+    // Initialize physics animations after initial render
     setTimeout(() => {
-      animateText('.section-heading');
       initFloatingPhysics('.about-icon, .hero-badge');
       // Refresh ScrollTrigger to account for lazy-loaded content
       import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => ScrollTrigger.refresh());
