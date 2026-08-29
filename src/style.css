@@ -624,16 +624,17 @@ img {
 
 /* ─── HERO 3D TERMINAL CARD FLIP ─── */
 .hero-terminal-wrapper {
-  perspective: 1200px;
+  perspective: 1400px;
   position: relative;
   width: 100%;
-  max-width: 540px;
+  max-width: 520px;
   margin: 0 auto;
 }
 
 .terminal-card-flipper {
   position: relative;
   width: 100%;
+  min-height: 380px;
   transform-style: preserve-3d;
   will-change: transform;
 }
@@ -642,6 +643,7 @@ img {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   width: 100%;
+  height: 100%;
   transform-style: preserve-3d;
 }
 
@@ -655,8 +657,18 @@ img {
   transform: rotateY(0deg);
 }
 
-.terminal-face-photo .term-card {
+.terminal-face-photo .term-card,
+.terminal-face-shell .term-card {
   height: 100%;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-face-photo .term-body {
+  padding: 0.5rem;
+  flex-grow: 1;
+  display: flex;
 }
 
 .terminal-face-shell {
@@ -665,12 +677,25 @@ img {
   z-index: 1;
 }
 
-.hero-photo-container {
+.hero-photo-card {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 260px;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
   border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #09090e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.hero-photo-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
   overflow: hidden;
 }
 
@@ -678,32 +703,98 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 15%;
   display: block;
-  filter: contrast(1.05) brightness(0.95);
-  transition: transform 0.6s ease;
+  filter: contrast(1.08) brightness(0.92);
+  transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.photo-terminal:hover .hero-photo-img {
-  transform: scale(1.03);
+.hero-photo-card:hover .hero-photo-img {
+  transform: scale(1.04);
 }
 
-.hero-photo-badge {
+.hero-photo-gradient-overlay {
   position: absolute;
-  bottom: 0.85rem;
-  left: 0.85rem;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 16, 0.05) 0%,
+    rgba(10, 10, 16, 0.35) 55%,
+    rgba(10, 10, 16, 0.95) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-photo-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.12),
+    rgba(0, 0, 0, 0.12) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.hero-photo-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.1rem 1.25rem;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.hero-photo-author h4 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.hero-photo-role {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  margin-top: 0.15rem;
+}
+
+.hero-photo-tags {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+}
+
+.hero-photo-tag {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.35rem 0.75rem;
-  border-radius: 999px;
-  background: rgba(10, 10, 15, 0.75);
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  color: #fff;
-  font-size: 0.72rem;
-  font-family: var(--font-mono);
+}
+
+.hero-photo-tag i {
+  color: var(--accent);
+  font-size: 0.68rem;
 }
 
 .terminal-flip-btn {

@@ -149,11 +149,22 @@ export default function HeroSection({ onNavigate }) {
           <div className={`terminal-card-flipper ${isFlipped ? 'is-flipped' : ''}`}>
             {/* Front Face: Andrés' Photo */}
             <div className="terminal-face terminal-face-photo">
-              <TerminalCard filename="erazo@portfolio ~ avatar.jpg" className="hero-terminal photo-terminal" onFlip={toggleFlip}>
-                <div className="hero-photo-container">
-                  <img src="/assets/hero-photo.jpg" alt="Andrés Erazo" className="hero-photo-img" />
-                  <div className="hero-photo-badge">
-                    <span className="status-dot"></span> Andrés Erazo @ Javeriana
+              <TerminalCard filename="erazo@portfolio ~ profile.jpg" className="hero-terminal photo-terminal" onFlip={toggleFlip}>
+                <div className="hero-photo-card">
+                  <div className="hero-photo-wrapper">
+                    <img src="/assets/hero-photo.jpg" alt="Andrés Erazo" className="hero-photo-img" />
+                    <div className="hero-photo-gradient-overlay"></div>
+                    <div className="hero-photo-scanlines"></div>
+                  </div>
+                  <div className="hero-photo-info">
+                    <div className="hero-photo-author">
+                      <h4>Andrés Erazo</h4>
+                      <span className="hero-photo-role">Ingeniero de Sistemas</span>
+                    </div>
+                    <div className="hero-photo-tags">
+                      <span className="hero-photo-tag"><i className="fas fa-graduation-cap"></i> Univ. Javeriana</span>
+                      <span className="hero-photo-tag"><i className="fas fa-code"></i> Full Stack</span>
+                    </div>
                   </div>
                 </div>
               </TerminalCard>
