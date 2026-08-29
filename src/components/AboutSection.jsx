@@ -16,10 +16,15 @@ export default function AboutSection() {
       <div className="bento-grid bento-grid-3 stagger-children">
         <FadeIn>
           <TerminalCard filename="history.ts">
-            <div className="about-icon">
-              <i className="fas fa-terminal"></i>
+            <div className="about-header">
+              <div className="about-avatar-wrapper">
+                <img src="/assets/foto.webp" alt="Andrés Erazo" className="about-avatar" />
+              </div>
+              <div className="about-title-group">
+                <h3>Mi Historia</h3>
+                <span className="about-subtitle">Full Stack & Mobile Dev</span>
+              </div>
             </div>
-            <h3>Mi Historia</h3>
             <p>
 Más de 10 años convirtiendo ideas en productos digitales que la gente disfruta usar. Trabajo con fundadores, empresas y equipos que saben lo que quieren lograr, pero necesitan a alguien que lo haga realidad — con criterio, con calidad y sin vueltas. Si tu producto tiene que verse bien y funcionar mejor, estás en el lugar correcto. 
             </p>
